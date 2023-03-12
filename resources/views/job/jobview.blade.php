@@ -179,7 +179,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('form/apply/job/save') }}" method="POST" enctype="multipart/form-data">
+                            <form id="apply_jobs" action="{{ route('form/apply/job/save') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label>Name</label>
@@ -219,4 +219,27 @@
         <!-- /Page Wrapper -->
     </div>
     <!-- /Main Wrapper -->
+    @section('script')
+    <script>
+        $('#apply_jobs').validate({  
+            rules: {  
+                name: 'required',  
+                phone: 'required',
+                email: 'required',    
+                message: 'required',    
+                cv_upload: 'required',    
+            },  
+            messages: {
+                name: 'Please input your name',  
+                phone: 'Please input your phone number',  
+                email: 'Please input your email',  
+                message: 'Please input your message',  
+                cv_upload: 'Please upload your cv',  
+            },  
+            submitHandler: function(form) {  
+                form.submit();
+            }  
+        });  
+    </script>
+    @endsection
 @endsection

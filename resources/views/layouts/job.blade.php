@@ -28,6 +28,12 @@
         <link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
         <script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
         <script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
+		@yield('style')
+		<style>
+			.error{
+				color: red;
+			}
+		</style>
 		
     </head>
     <body>
@@ -50,6 +56,8 @@
 		<!-- Datetimepicker JS -->
 		<script src="{{ URL::to('assets/js/moment.min.js') }}"></script>
 		<script src="{{ URL::to('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+		<!-- validation-->
+		<script src="{{ URL::to('assets/js/jquery.validate.js') }}"></script>
 		<!-- Custom JS -->
 		<script src="{{ URL::to('assets/js/app.js') }}"></script>
 		@yield('script')
