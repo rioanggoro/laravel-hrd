@@ -3,10 +3,8 @@
 @section('content')
     <!-- Page Wrapper -->
     <div class="page-wrapper">
-                
         <!-- Page Content -->
         <div class="content container-fluid">
-        
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
@@ -20,7 +18,6 @@
                 </div>
             </div>
             <!-- /Page Header -->
-            
             <div class="row">
                 <div class="col-md-12">
                     <form action="{{ route('create/estimate/update') }}" method="POST">

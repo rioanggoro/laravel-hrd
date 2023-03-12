@@ -77,15 +77,30 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-striped custom-table datatable">
+                        <table class="table table-striped custom-table datatable" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Employee</th>
                                     <th>Employee ID</th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
                                     <th>Email</th>
                                     <th>Join Date</th>
                                     <th>Role</th>
                                     <th>Salary</th>
+                                    <th hidden></th>
                                     <th>Payslip</th>
                                     <th class="text-right">Action</th>
                                 </tr>

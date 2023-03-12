@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-striped custom-table datatable">
+                        <table class="table table-striped custom-table datatable" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Name</th>
