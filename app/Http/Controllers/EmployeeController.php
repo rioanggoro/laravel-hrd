@@ -35,7 +35,7 @@ class EmployeeController extends Controller
         return view('form.employeelist',compact('users','userList','permission_lists'));
     }
 
-    // save data employee
+    //  save data employee
     public function saveRecord(Request $request)
     {
         $request->validate([
