@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="main-wrapper">	
+    <div class="main-wrapper">
         <div class="error-box">
             <h1>500</h1>
             <h3><i class="fa fa-warning"></i> Oops! Something went wrong</h3>
