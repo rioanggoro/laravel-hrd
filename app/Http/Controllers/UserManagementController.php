@@ -266,18 +266,11 @@ class UserManagementController extends Controller
             $todayDate = $dt->toDayDateTimeString();
             $image_name = $request->hidden_image;
             $image = $request->file('images');
-            if($image_name =='photo_defaults.jpg')
-            {
-                if($image != '')
-                {
-                    $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('/assets/images/'), $image_name);
-                }
-            }
-            else{
-                
-                if($image != '')
-                {
+            if($image_name =='photo_defaults.jpg') {
+                $image_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('/assets/images/'), $image_name);
+            } else {
+                if (!empty($image)) {
                     unlink('assets/images/'.$image_name);
                     $image_name = rand() . '.' . $image->getClientOriginalExtension();
                     $image->move(public_path('/assets/images/'), $image_name);
@@ -313,7 +306,7 @@ class UserManagementController extends Controller
             Toastr::success('User updated successfully :)','Success');
             return redirect()->route('userManagement');
 
-        }catch(\Exception $e){
+        } catch(\Exception $e){
             DB::rollback();
             Toastr::error('User update fail :)','Error');
             return redirect()->back();
