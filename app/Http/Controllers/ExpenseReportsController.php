@@ -34,4 +34,10 @@ class ExpenseReportsController extends Controller
                     ->get();
         return view('reports.leavereports',compact('leaves'));
     }
+
+    /** payment report index page */
+    public function paymentsReportIndex()
+    {
+        return view('reports.payments-reports');
+    }
 }
