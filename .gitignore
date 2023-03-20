@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/assets/images/question
 /storage/*.key
 /vendor
 .env
