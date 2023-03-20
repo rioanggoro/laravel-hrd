@@ -12,11 +12,13 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class ForgotPasswordController extends Controller
 {
+    /** get email*/
     public function getEmail()
     {
        return view('auth.passwords.email');
     }
 
+    /** post email */
     public function postEmail(Request $request)
     {
         $request->validate([
@@ -30,10 +32,10 @@ class ForgotPasswordController extends Controller
         );
 
         Mail::send('auth.verify',['token' => $token], function($message) use ($request) {
-                  $message->from($request->email);
-                  $message->to('your email');
-                  $message->subject('Reset Password Notification');
-               });
+            $message->from($request->email);
+            $message->to('your email'); /** input your email to send */
+            $message->subject('Reset Password Notification');
+            });
         Toastr::success('We have e-mailed your password reset link! :)','Success');
         return back();
     }

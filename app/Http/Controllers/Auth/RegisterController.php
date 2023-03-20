@@ -14,11 +14,14 @@ use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
+    /** regiter page */
     public function register()
     {
         $role = DB::table('role_type_users')->get();
         return view('auth.register',compact('role'));
     }
+
+    /** insert new users */
     public function storeUser(Request $request)
     {
         $request->validate([
@@ -29,7 +32,7 @@ class RegisterController extends Controller
             'password_confirmation' => 'required',
         ]);
 
-        $dt       = Carbon::now();
+        $dt        = Carbon::now();
         $todayDate = $dt->toDayDateTimeString();
         
         User::create([

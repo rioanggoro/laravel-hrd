@@ -49,11 +49,13 @@ class LoginController extends Controller
         ]);
     }
 
+    /** index login page */
     public function login()
     {
         return view('auth.login');
     }
 
+    /** login page to check database table users */
     public function authenticate(Request $request)
     {
         $request->validate([
@@ -92,6 +94,7 @@ class LoginController extends Controller
         }
     }
 
+    /** logout and forget session */
     public function logout(Request $request)
     {
         $dt         = Carbon::now();
