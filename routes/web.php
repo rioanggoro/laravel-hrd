@@ -251,6 +251,7 @@ Route::controller(ExpenseReportsController::class)->group(function () {
     Route::get('form/daily/reports/page', 'dailyReport')->middleware('auth')->name('form/daily/reports/page');
     Route::get('form/leave/reports/page','leaveReport')->middleware('auth')->name('form/leave/reports/page');
     Route::get('form/payments/reports/page','paymentsReportIndex')->middleware('auth')->name('form/payments/reports/page');
+    Route::get('form/employee/reports/page','employeeReportsIndex')->middleware('auth')->name('form/employee/reports/page');
 });
 
 // ----------------------------- performance  ------------------------------//

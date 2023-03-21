@@ -40,4 +40,10 @@ class ExpenseReportsController extends Controller
     {
         return view('reports.payments-reports');
     }
+
+    /** employee-reports page */
+    public function employeeReportsIndex()
+    {
+        return view('reports.employee-reports');
+    }
 }
