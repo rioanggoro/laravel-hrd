@@ -33,18 +33,7 @@
                     <div class="job-content job-widget">
                         <div class="job-desc-title"><h4>Job Description</h4></div>
                         <div class="job-description">
-                            <p>{{ $job_view_detail[0]->description }}</p>
-                        </div>
-                        <div class="job-desc-title"><h4>Job Description</h4></div>
-                        <div class="job-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                            <ul class="square-list">
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            </ul>
+                            <p>{!!nl2br ($job_view_detail[0]->description) !!}</p>
                         </div>
                     </div>
                 </div>
