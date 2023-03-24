@@ -1,4 +1,84 @@
 @extends('layouts.settings')
+@section('style')
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <style>
+        /*  customize check box */
+        .option-input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            position: relative;
+            top: 3px;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            transition: all 0.15s ease-out 0s;
+            background: #DF021A;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 0.5rem;
+            outline: none;
+            position: relative;
+            z-index: 1000;
+        }
+        .option-input:hover {
+            background: #DF021A;
+        }
+        .option-input:checked {
+            background: #55CD62;
+        }
+        .option-input:checked::before {
+            width: 20px;
+            height: 20px;
+            display:flex;
+            content: '\f00c';
+            font-size: 15px;
+            font-weight:bold;
+            position: absolute;
+            align-items:center;
+            justify-content:center;
+            font-family:'Font Awesome 5 Free';
+        }
+        .option-input:checked::after {
+            -webkit-animation: click-wave 0.65s;
+            -moz-animation: click-wave 0.65s;
+            animation: click-wave 0.65s;
+            background: #55CD62;
+            content: '';
+            display: block;
+            position: relative;
+            z-index: 100;
+        }
+        .option-input.checkbox {
+            border-radius: 0%;
+        }
+        .option-input.checkbox::after {
+            border-radius: 0%;
+        }
+
+        @keyframes click-wave {
+        0% {
+            height: 20px;
+            width: 20px;
+            opacity: 0.35;
+            position: relative;
+        } 100% {
+            height: 150px;
+            width: 150px;
+            margin-left: -60px;
+            margin-top: -60px;
+            opacity: 0;
+            }
+        }
+        /* end customize check box radio*/
+    </style>
+@endsection
 @section('content')
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
@@ -130,85 +210,85 @@
                                 <tr>
                                     <td>Employee</td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Holidays</td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Leaves</td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Events</td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" checked="">
+                                        <input type="checkbox" class="option-input checkbox" checked>
                                     </td>
                                 </tr>
                             </tbody>
@@ -230,7 +310,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('roles/permissions/save') }}" method="POST">
+                        <form id="validation_role" action="{{ route('roles/permissions/save') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label>Role Name <span class="text-danger">*</span></label>
@@ -321,6 +401,19 @@
             var _this = $(this).closest("li");
             $('.e_id').val(_this.find('.id').text());
         });
+    </script>
+     <script>
+        $('#validation_role').validate({  
+            rules: {  
+                roleName: 'required',    
+            },  
+            messages: {
+                roleName: 'Please input new role name.',  
+            },  
+            submitHandler: function(form) {  
+                form.submit();
+            }  
+        });  
     </script>
     @endsection
 @endsection

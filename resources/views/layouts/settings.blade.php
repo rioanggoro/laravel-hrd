@@ -26,6 +26,12 @@
 		<script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
 
     </head>
+	@yield('style')
+	<style>
+		.error{
+			color: red;
+		}
+	</style>
     <body>
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
@@ -311,6 +317,8 @@
 		<script src="{{ URL::to('assets/js/jquery.slimscroll.min.js') }}"></script>
 		<!-- Select2 JS -->
 		<script src="{{ URL::to('assets/js/select2.min.js') }}"></script>
+		<!-- validation-->
+		<script src="{{ URL::to('assets/js/jquery.validate.js') }}"></script>
 		<!-- Custom JS -->
 		<script src="{{ URL::to('assets/js/app.js') }}"></script>
 		@yield('script')

@@ -135,15 +135,6 @@
                         <li><a class="{{set_active(['page/aptitude/result'])}}" href="{{ route('page/aptitude/result') }}"> Aptitude Results </a></li>
                     </ul>
                 </li>
-                <li class="menu-title"> <span>Pages</span> </li>
-                <li class="{{set_active(['employee/profile/*'])}} submenu">
-                    <a href="#"><i class="la la-user"></i>
-                        <span> Profile </span> <span class="menu-arrow"></span>
-                    </a>
-                    <ul style="display: none;">
-                        <li><a class="{{set_active(['employee/profile/*'])}}" href="{{ route('all/employee/list') }}"> Employee Profile </a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </div>
