@@ -303,6 +303,9 @@
                 <!-- /Mobile Menu -->
             </div>
 			<!-- /Header -->
+			<!-- Sidebar -->
+			@include('sidebar.sidebarsetting')
+			<!-- /Sidebar -->
             {{-- content --}}
             @yield('content')
         </div>
