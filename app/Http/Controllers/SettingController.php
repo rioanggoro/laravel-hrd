@@ -94,4 +94,10 @@ class SettingController extends Controller
             return redirect()->back();
         }
     }
+
+    /** localization */
+    public function localizationIndex()
+    {
+        return view('settings.localization');
+    }
 }
