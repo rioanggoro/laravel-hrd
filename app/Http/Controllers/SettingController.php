@@ -94,4 +94,15 @@ class SettingController extends Controller
             return redirect()->back();
         }
     }
+
+    /** localization */
+    public function localizationIndex()
+    {
+        return view('settings.localization');
+    }
+    /** salary settings */
+    public function salarySettingsIndex()
+    {
+        return view('settings.salary-settings');
+    }
 }
