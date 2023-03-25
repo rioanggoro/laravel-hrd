@@ -169,6 +169,8 @@ Route::controller(JobController::class)->group(function () {
     Route::get('page/schedule/timing', 'scheduleTimingIndex')->middleware('auth')->name('page/schedule/timing');
     Route::get('page/aptitude/result', 'aptituderesultIndex')->middleware('auth')->name('page/aptitude/result');
 
+    Route::post('jobtypestatus/update', 'jobTypeStatusUpdate')->name('jobtypestatus/update'); // update status job type ajax
+
 });
  
 // ---------------------------- form employee ---------------------------//

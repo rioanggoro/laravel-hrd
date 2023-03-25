@@ -9,6 +9,7 @@ use App\Models\ApplyForJob;
 use App\Models\Category;
 use App\Models\Question;
 use Carbon\Carbon;
+use Response;
 use Brian2694\Toastr\Facades\Toastr;
 
 class JobController extends Controller
@@ -141,6 +142,16 @@ class JobController extends Controller
             Toastr::error('Add Job fail :)','Error');
             return redirect()->back();
         } 
+    }
+
+    /** update ajax status */
+    public function jobTypeStatusUpdate(Request $request) {
+        $full_time = $request->full_time;
+        $data = AddJob::all();
+        return Response::json([
+            'success' => true,
+            'data'   => $data,
+        ]); 
     }
     
     /** job applicants */

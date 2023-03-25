@@ -92,11 +92,11 @@
                                                     <i class="fa fa-dot-circle-o text-dark"></i> {{ $items->job_type }}
                                                 @endif
                                             </a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Full Time</a>
+                                            <div class="dropdown-menu dropdown-menu-right jobtype_status">
+                                                <a class="dropdown-item" href="#" id="full_time"><i class="fa fa-dot-circle-o text-info"></i> Full Time</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Part Time</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Internship</a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-warning"></i> Temporary</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-warning"></i> Temporary<a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-dark"></i> Remote</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-dark"></i> Others</a>
                                             </div>
@@ -433,6 +433,7 @@
         <!-- /Delete Job Modal -->
     </div>
     <!-- /Page Wrapper -->
+
     @section('script')
         {{-- update --}}
         <script>
@@ -467,6 +468,29 @@
                 $( _option).appendTo("#e_status");
             });
             
+        </script>
+        <script>
+            $(document).ready(function()
+            {
+                $('.jobtype_status').click(function()
+                {
+                    var full_time = $("#full_time").text();
+                    var full_time = $("#full_time").text();
+                    
+                    $.ajax({
+                        url: '{{route("jobtypestatus/update")}}',
+                        type: "POST",
+                        data: {
+                            full_time: full_time,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(data)
+                        {
+                            console.log(full_time);
+                        },
+                    });
+                });
+            });
         </script>
     @endsection
 @endsection
