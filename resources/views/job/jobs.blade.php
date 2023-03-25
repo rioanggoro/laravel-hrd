@@ -76,21 +76,42 @@
                                     <td class="text-center">
                                         <div class="dropdown action-label">
                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-dot-circle-o text-danger"></i> {{ $items->job_type }}
+                                                @if($items->job_type == 'Full Time')
+                                                    <i class="fa fa-dot-circle-o text-info"></i> {{ $items->job_type }}
+                                                @elseif($items->job_type == 'Part Time')
+                                                    <i class="fa fa-dot-circle-o text-success"></i> {{ $items->job_type }}
+                                                @elseif($items->job_type == '')
+                                                    <i class="fa fa-dot-circle-o text-danger"></i> {{ $items->job_type }}
+                                                @elseif($items->job_type == 'Internship')
+                                                    <i class="fa fa-dot-circle-o text-danger"></i> {{ $items->job_type }}
+                                                @elseif($items->job_type == 'Temporary')
+                                                    <i class="fa fa-dot-circle-o text-warning"></i> {{ $items->job_type }}
+                                                @elseif($items->job_type == 'Remote')
+                                                    <i class="fa fa-dot-circle-o text-dark"></i> {{ $items->job_type }}
+                                                @elseif($items->job_type == 'Others')
+                                                    <i class="fa fa-dot-circle-o text-dark"></i> {{ $items->job_type }}
+                                                @endif
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Full Time</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Part Time</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Internship</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-warning"></i> Temporary</a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-warning"></i> Other</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-dark"></i> Remote</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-dark"></i> Others</a>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="dropdown action-label">
                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-dot-circle-o text-danger"></i> {{ $items->status }}
+                                                @if($items->status == 'Open')
+                                                    <i class="fa fa-dot-circle-o text-info"></i> {{ $items->status }}
+                                                @elseif($items->status == 'Closed')
+                                                    <i class="fa fa-dot-circle-o text-success"></i> {{ $items->status }}
+                                                @elseif($items->status == 'Cancelled')
+                                                    <i class="fa fa-dot-circle-o text-danger"></i> {{ $items->status }}
+                                                @endif
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-info"></i> Open</a>
