@@ -63,7 +63,7 @@
                         <div class="info-list">
                             <span><i class="fa fa-map-signs"></i></span>
                             <h5>Location</h5>
-                            <p>{{ $job_view_detail[0]->job_location }}</p>
+                            <p>{!!nl2br ($job_view_detail[0]->job_location) !!}</p>
                         </div>
                         <div class="info-list">
                             <p class="text-truncate"> 096-566-666
