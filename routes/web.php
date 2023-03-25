@@ -75,6 +75,7 @@ Route::controller(SettingController::class)->group(function () {
     Route::post('roles/permissions/delete', 'deleteRolesPermissions')->middleware('auth')->name('roles/permissions/delete');
 
     Route::get('localization/page', 'localizationIndex')->middleware('auth')->name('localization/page'); /** index page localization */
+    Route::get('salary/settings/page', 'salarySettingsIndex')->middleware('auth')->name('salary/settings/page'); /** index page salary settings */
     
 });
 

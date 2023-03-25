@@ -13,7 +13,7 @@
                 <li><a href="performance-setting.html"><i class="la la-chart-bar"></i><span>Performance Settings</span></a></li>
                 <li><a href="approval-setting.html"><i class="la la-thumbs-up"></i><span>Approval Settings</span></a></li>
                 <li><a href="invoice-settings.html"><i class="la la-pencil-square"></i><span>Invoice Settings</span></a></li>
-                <li><a href="salary-settings.html"><i class="la la-money"></i><span>Salary Settings</span></a></li>
+                <li class="{{set_active(['salary/settings/page'])}}"><a href="{{ route('salary/settings/page') }}"><i class="la la-money"></i><span>Salary Settings</span></a></li>
                 <li><a href="notifications-settings.html"><i class="la la-globe"></i><span>Notifications</span></a></li>
                 <li class="{{set_active(['rchange/password'])}}"><a href="{{ route('change/password') }}"><i class="la la-lock"></i><span>Change Password</span></a></li>
                 <li><a href="leave-type.html"><i class="la la-cogs"></i><span>Leave Type</span></a></li>

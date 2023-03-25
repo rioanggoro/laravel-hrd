@@ -100,4 +100,9 @@ class SettingController extends Controller
     {
         return view('settings.localization');
     }
+    /** salary settings */
+    public function salarySettingsIndex()
+    {
+        return view('settings.salary-settings');
+    }
 }
