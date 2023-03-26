@@ -35,6 +35,7 @@
 </head>
 
 <body>
+	@yield('style')
 	<style>    
 		.invalid-feedback{
 			font-size: 14px;
