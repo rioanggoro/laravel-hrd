@@ -379,6 +379,12 @@ class UserManagementController extends Controller
         Toastr::success('User change successfully :)','Success');
         return redirect()->intended('home');
     }
+
+    /** user profile Emergency Contact */
+    public function emergencyContactSaveOrUpdate()
+    {
+        return 'OK';
+    }
 }
 
 

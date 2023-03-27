@@ -1415,7 +1415,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="validation" action="{{ route('user/profile/emergency/contact/save') }}" method="POST">
+                            @csrf
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Primary Contact</h3>
@@ -1723,4 +1724,33 @@
 
         <!-- /Page Content -->
     </div>
+    @section('script')
+    <script>
+        $('#validation').validate({  
+            rules: {  
+                name_primary: 'required',  
+                relationship_primary: 'required',  
+                phone_primary: 'required',  
+                phone_2_primary: 'required',  
+                name_secondary: 'required',  
+                relationship_secondary: 'required',  
+                phone_secondary: 'required',  
+                phone_2_secondary: 'required',  
+            },  
+            messages: {
+                name_primary: 'Please input name primary',  
+                relationship_primary: 'Please input relationship primary',  
+                phone_primary: 'Please input phone primary',  
+                phone_2_primary: 'Please input phone 2 primary',  
+                name_secondary: 'Please input name secondary',  
+                relationship_secondary: 'Please input relationship secondary',  
+                phone_secondaryr: 'Please input phone secondary',  
+                phone_2_secondary: 'Please input phone 2 secondary',  
+            },  
+            submitHandler: function(form) {  
+                form.submit();
+            }  
+        });  
+    </script>
+    @endsection
 @endsection

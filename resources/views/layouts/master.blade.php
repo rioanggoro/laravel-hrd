@@ -40,10 +40,12 @@
 		.invalid-feedback{
 			font-size: 14px;
 		}
+		.error{
+			color: red;
+		}
 	</style>
 	<!-- Main Wrapper -->
 	<div class="main-wrapper">
-		
 		<!-- Loader -->
 		<div id="loader-wrapper">
 			<div id="loader">
@@ -359,7 +361,9 @@
 	<script src="{{ URL::to('assets/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/dataTables.bootstrap4.min.js') }}"></script>
 	<!-- Multiselect JS -->
-	<script src="{{ URL::to('assets/js/multiselect.min.js') }}"></script>		
+	<script src="{{ URL::to('assets/js/multiselect.min.js') }}"></script>
+	<!-- validation-->
+	<script src="{{ URL::to('assets/js/jquery.validate.js') }}"></script>	
 	<!-- Custom JS -->
 	<script src="{{ URL::to('assets/js/app.js') }}"></script>
 	@yield('script')
