@@ -150,6 +150,7 @@
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
+                                    <!-- Personal Informations -->
                                     <h3 class="card-title">Personal Informations <a href="#" class="edit-icon" data-toggle="modal" data-target="#personal_info_modal"><i class="fa fa-pencil"></i></a></h3>
                                     @if (!empty($userInformation))
                                         <ul class="personal-info">
@@ -222,9 +223,12 @@
                                         </li>
                                     </ul>
                                     @endif
+                                    <!-- End Personal Informations -->
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Emergency Contact -->
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
@@ -263,7 +267,9 @@
                                 </div>
                             </div>
                         </div>
+                         <!-- End Emergency Contact -->
                     </div>
+
                     <div class="row">
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
@@ -1417,25 +1423,25 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="name_primary">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <input type="text" class="form-control" name="relationship_primary">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <input type="text" class="form-control" name="phone_primary">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                                <input type="text" class="form-control" name="phone_2_primary">
                                             </div>
                                         </div>
                                     </div>
@@ -1444,37 +1450,37 @@
                             
                             <div class="card">
                                 <div class="card-body">
-                                    <h3 class="card-title">Primary Contact</h3>
+                                    <h3 class="card-title">Secondary Contact</h3>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="name_secondary">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <input type="text" class="form-control" name="relationship_secondary">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                <input type="text" class="form-control" name="phone_secondary">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                                <input type="text" class="form-control" name="phone_2_secondary">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
+                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                             </div>
                         </form>
                     </div>
