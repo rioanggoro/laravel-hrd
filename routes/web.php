@@ -123,7 +123,10 @@ Route::controller(UserManagementController::class)->group(function () {
     Route::get('activity/login/logout', 'activityLogInLogOut')->middleware('auth')->name('activity/login/logout');
     Route::post('search/user/list', 'searchUser')->name('search/user/list');
     Route::get('change/password', 'changePasswordView')->middleware('auth')->name('change/password');
-    Route::post('change/password/db', 'changePasswordDB')->name('change/password/db');    
+    Route::post('change/password/db', 'changePasswordDB')->name('change/password/db');
+    
+    Route::post('user/profile/emergency/contact/save', 'emergencyContactSaveOrUpdate')->name('user/profile/emergency/contact/save'); /** save or update emergency contact */
+    
 });
 
 // --------------------------------- job ---------------------------------//
