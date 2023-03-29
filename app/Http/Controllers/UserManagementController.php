@@ -11,6 +11,7 @@ use App\Models\Form;
 use App\Models\ProfileInformation;
 use App\Models\PersonalInformation;
 use App\Rules\MatchOldPassword;
+use App\Models\UserEmergencyContact;
 use Carbon\Carbon;
 use Session;
 use Auth;
@@ -381,9 +382,42 @@ class UserManagementController extends Controller
     }
 
     /** user profile Emergency Contact */
-    public function emergencyContactSaveOrUpdate()
+    public function emergencyContactSaveOrUpdate(Request $request)
     {
-        return 'OK';
+        /** validate form */
+        $request->validate([
+            'name_primary' =>'required',
+            'relationship_primary'   => 'required',
+            'phone_primary'          => 'required',
+            'phone_2_primary'        => 'required',
+            'name_secondary'         => 'required',
+            'relationship_secondary' => 'required',
+            'phone_secondary'        => 'required',
+            'phone_2_secondary'      => 'required',
+        ]);
+
+        try {
+            
+            /** save or update to databases user_emergency_contacts table */
+            $saveRecord = UserEmergencyContact::updateOrCreate(['user_id' => $request->user_id]);
+            $saveRecord->name_primary           = $request->name_primary;
+            $saveRecord->relationship_primary   = $request->relationship_primary;
+            $saveRecord->phone_primary          = $request->phone_primary;
+            $saveRecord->phone_2_primary        = $request->phone_2_primary;
+            $saveRecord->name_secondary         = $request->name_secondary;
+            $saveRecord->relationship_secondary = $request->relationship_secondary;
+            $saveRecord->phone_secondary        = $request->phone_secondary;
+            $saveRecord->phone_2_secondary      = $request->phone_2_secondary;
+            $saveRecord->save();
+            
+            DB::commit();
+            Toastr::success('Add Emergency Contact successfully :)','Success');
+            return redirect()->back();
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Add Emergency Contact fail :)','Error');
+            return redirect()->back();
+        }
     }
 }
 

@@ -1417,6 +1417,7 @@
                     <div class="modal-body">
                         <form id="validation" action="{{ route('user/profile/emergency/contact/save') }}" method="POST">
                             @csrf
+                            <input type="hidden" class="form-control" name="user_id" value="{{  Session::get('user_id') }}">
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Primary Contact</h3>
