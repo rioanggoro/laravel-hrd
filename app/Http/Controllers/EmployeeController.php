@@ -16,19 +16,20 @@ class EmployeeController extends Controller
     public function cardAllEmployee(Request $request)
     {
         $users = DB::table('users')
-                    ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                    ->join('employees','users.user_id','employees.employee_id')
+                    ->select('users.*','employees.birth_date', 'employees.gender','employees.company')
                     ->get(); 
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
         return view('form.allemployeecard',compact('users','userList','permission_lists'));
     }
-    // all employee list
+
+    /** all employee list */
     public function listAllEmployee()
     {
         $users = DB::table('users')
-                    ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                    ->join('employees','users.user_id', 'employees.employee_id')
+                    ->select('users.*','employees.birth_date','employees.gender','employees.company')
                     ->get();
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
@@ -93,22 +94,23 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
     }
-    // view edit record
+    
+    /** view edit record */
     public function viewRecord($employee_id)
     {
         $permission = DB::table('employees')
-            ->join('module_permissions', 'employees.employee_id', '=', 'module_permissions.employee_id')
-            ->select('employees.*', 'module_permissions.*')
-            ->where('employees.employee_id','=',$employee_id)
-            ->get();
+            ->join('module_permissions','employees.employee_id','module_permissions.employee_id')
+            ->select('employees.*','module_permissions.*')->where('employees.employee_id',$employee_id)->get();
         $employees = DB::table('employees')->where('employee_id',$employee_id)->get();
         return view('form.edit.editemployee',compact('employees','permission'));
     }
-    // update record employee
+
+    /** update record employee */
     public function updateRecord( Request $request)
     {
         DB::beginTransaction();
-        try{
+        try {
+
             // update table Employee
             $updateEmployee = [
                 'id'=>$request->id,
@@ -119,6 +121,7 @@ class EmployeeController extends Controller
                 'employee_id'=>$request->employee_id,
                 'company'=>$request->company,
             ];
+
             // update table user
             $updateUser = [
                 'id'=>$request->id,
@@ -127,7 +130,7 @@ class EmployeeController extends Controller
             ];
 
             // update table module_permissions
-            for($i=0;$i<count($request->id_permission);$i++)
+            for($i = 0;$i<count($request->id_permission);$i++)
             {
                 $UpdateModule_permissions = [
                     'employee_id' => $request->employee_id,
@@ -155,32 +158,31 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
     }
-    // delete record
+
+    /** delete record */
     public function deleteRecord($employee_id)
     {
         DB::beginTransaction();
         try{
-
             Employee::where('employee_id',$employee_id)->delete();
             module_permission::where('employee_id',$employee_id)->delete();
 
             DB::commit();
             Toastr::success('Delete record successfully :)','Success');
             return redirect()->route('all/employee/card');
-
         }catch(\Exception $e){
             DB::rollback();
             Toastr::error('Delete record fail :)','Error');
             return redirect()->back();
         }
     }
-    // employee search
+
+    /** employee search */
     public function employeeSearch(Request $request)
     {
         $users = DB::table('users')
-                    ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                    ->get();
+                    ->join('employees','users.user_id','employees.employee_id')
+                    ->select('users.*','employees.birth_date','employees.gender','employees.company')->get();
         $permission_lists = DB::table('permission_lists')->get();
         $userList = DB::table('users')->get();
 
@@ -188,36 +190,33 @@ class EmployeeController extends Controller
         if($request->employee_id)
         {
             $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
-                        ->get();
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')->get();
         }
         // search by name
         if($request->name)
         {
             $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('users.name','LIKE','%'.$request->name.'%')
-                        ->get();
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('users.name','LIKE','%'.$request->name.'%')->get();
         }
         // search by name
         if($request->position)
         {
             $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('users.position','LIKE','%'.$request->position.'%')
-                        ->get();
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
         }
 
         // search by name and id
         if($request->employee_id && $request->name)
         {
             $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
                         ->where('employee_id','LIKE','%'.$request->employee_id.'%')
                         ->where('users.name','LIKE','%'.$request->name.'%')
                         ->get();
@@ -226,129 +225,118 @@ class EmployeeController extends Controller
         if($request->employee_id && $request->position)
         {
             $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date', 'employees.gender', 'employees.company')
                         ->where('employee_id','LIKE','%'.$request->employee_id.'%')
-                        ->where('users.position','LIKE','%'.$request->position.'%')
-                        ->get();
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
         }
         // search by name and position
         if($request->name && $request->position)
         {
             $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
                         ->where('users.name','LIKE','%'.$request->name.'%')
-                        ->where('users.position','LIKE','%'.$request->position.'%')
-                        ->get();
-        }
-         // search by name and position and id
-         if($request->employee_id && $request->name && $request->position)
-         {
-             $users = DB::table('users')
-                         ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                         ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                         ->where('employee_id','LIKE','%'.$request->employee_id.'%')
-                         ->where('users.name','LIKE','%'.$request->name.'%')
-                         ->where('users.position','LIKE','%'.$request->position.'%')
-                         ->get();
-         }
-        return view('form.allemployeecard',compact('users','userList','permission_lists'));
-    }
-    public function employeeListSearch(Request $request)
-    {
-        $users = DB::table('users')
-                    ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                    ->get(); 
-        $permission_lists = DB::table('permission_lists')->get();
-        $userList = DB::table('users')->get();
-
-        // search by id
-        if($request->employee_id)
-        {
-            $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
-                        ->get();
-        }
-        // search by name
-        if($request->name)
-        {
-            $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('users.name','LIKE','%'.$request->name.'%')
-                        ->get();
-        }
-        // search by name
-        if($request->position)
-        {
-            $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('users.position','LIKE','%'.$request->position.'%')
-                        ->get();
-        }
-
-        // search by name and id
-        if($request->employee_id && $request->name)
-        {
-            $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
-                        ->where('users.name','LIKE','%'.$request->name.'%')
-                        ->get();
-        }
-        // search by position and id
-        if($request->employee_id && $request->position)
-        {
-            $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
-                        ->where('users.position','LIKE','%'.$request->position.'%')
-                        ->get();
-        }
-        // search by name and position
-        if($request->name && $request->position)
-        {
-            $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                        ->where('users.name','LIKE','%'.$request->name.'%')
-                        ->where('users.position','LIKE','%'.$request->position.'%')
-                        ->get();
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
         }
         // search by name and position and id
         if($request->employee_id && $request->name && $request->position)
         {
             $users = DB::table('users')
-                        ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                        ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
                         ->where('employee_id','LIKE','%'.$request->employee_id.'%')
                         ->where('users.name','LIKE','%'.$request->name.'%')
-                        ->where('users.position','LIKE','%'.$request->position.'%')
-                        ->get();
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
+        }
+        return view('form.allemployeecard',compact('users','userList','permission_lists'));
+    }
+
+    /** list search employee */
+    public function employeeListSearch(Request $request)
+    {
+        $users = DB::table('users')
+                    ->join('employees','users.user_id','employees.employee_id')
+                    ->select('users.*','employees.birth_date','employees.gender','employees.company')->get(); 
+        $permission_lists = DB::table('permission_lists')->get();
+        $userList         = DB::table('users')->get();
+
+        // search by id
+        if($request->employee_id)
+        {
+            $users = DB::table('users')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')->get();
+        }
+        // search by name
+        if($request->name)
+        {
+            $users = DB::table('users')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('users.name','LIKE','%'.$request->name.'%')->get();
+        }
+        // search by name
+        if($request->position)
+        {
+            $users = DB::table('users')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
+        }
+
+        // search by name and id
+        if($request->employee_id && $request->name)
+        {
+            $users = DB::table('users')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
+                        ->where('users.name','LIKE','%'.$request->name.'%')->get();
+        }
+        // search by position and id
+        if($request->employee_id && $request->position)
+        {
+            $users = DB::table('users')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
+        }
+        // search by name and position
+        if($request->name && $request->position)
+        {
+            $users = DB::table('users')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('users.name','LIKE','%'.$request->name.'%')
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
+        }
+        // search by name and position and id
+        if($request->employee_id && $request->name && $request->position)
+        {
+            $users = DB::table('users')
+                        ->join('employees','users.user_id','employees.employee_id')
+                        ->select('users.*','employees.birth_date','employees.gender','employees.company')
+                        ->where('employee_id','LIKE','%'.$request->employee_id.'%')
+                        ->where('users.name','LIKE','%'.$request->name.'%')
+                        ->where('users.position','LIKE','%'.$request->position.'%')->get();
         }
         return view('form.employeelist',compact('users','userList','permission_lists'));
     }
 
-    // employee profile with all controller user
+    /** employee profile with all controller user */
     public function profileEmployee($user_id)
     {
         $users = DB::table('users')
                 ->leftJoin('personal_information','personal_information.user_id','users.user_id')
                 ->leftJoin('profile_information','profile_information.user_id','users.user_id')
-                ->where('users.user_id',$user_id)
-                ->first();
+                ->where('users.user_id',$user_id)->first();
         $user = DB::table('users')
                 ->leftJoin('personal_information','personal_information.user_id','users.user_id')
                 ->leftJoin('profile_information','profile_information.user_id','users.user_id')
-                ->where('users.user_id',$user_id)
-                ->get(); 
+                ->where('users.user_id',$user_id)->get(); 
         return view('form.employeeprofile',compact('user','users'));
     }
 
@@ -363,11 +351,11 @@ class EmployeeController extends Controller
     public function saveRecordDepartment(Request $request)
     {
         $request->validate([
-            'department'        => 'required|string|max:255',
+            'department' => 'required|string|max:255',
         ]);
 
         DB::beginTransaction();
-        try{
+        try {
 
             $department = department::where('department',$request->department)->first();
             if ($department === null)
@@ -384,7 +372,7 @@ class EmployeeController extends Controller
                 Toastr::error('Add new department exits :)','Error');
                 return redirect()->back();
             }
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Add new department fail :)','Error');
             return redirect()->back();
@@ -395,7 +383,7 @@ class EmployeeController extends Controller
     public function updateRecordDepartment(Request $request)
     {
         DB::beginTransaction();
-        try{
+        try {
             // update table departments
             $department = [
                 'id'=>$request->id,
@@ -417,13 +405,11 @@ class EmployeeController extends Controller
     public function deleteRecordDepartment(Request $request) 
     {
         try {
-
             department::destroy($request->id);
             Toastr::success('Department deleted successfully :)','Success');
             return redirect()->back();
         
         } catch(\Exception $e) {
-
             DB::rollback();
             Toastr::error('Department delete fail :)','Error');
             return redirect()->back();

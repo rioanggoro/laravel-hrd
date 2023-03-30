@@ -74,13 +74,10 @@ class TrainingTypeController extends Controller
     public function deleteTrainingType(Request $request)
     {
         try {
-
             TrainingType::destroy($request->id);
             Toastr::success('Training type deleted successfully :)','Success');
             return redirect()->back();
-        
         } catch(\Exception $e) {
-
             DB::rollback();
             Toastr::error('Training type delete fail :)','Error');
             return redirect()->back();

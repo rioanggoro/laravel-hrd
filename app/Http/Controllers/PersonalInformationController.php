@@ -43,7 +43,6 @@ class PersonalInformationController extends Controller
             DB::commit();
             Toastr::success('Create personal information successfully :)','Success');
             return redirect()->back();
-            
         } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Add personal information fail :)','Error');

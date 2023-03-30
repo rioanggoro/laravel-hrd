@@ -12,41 +12,38 @@ use Auth;
 
 class PerformanceController extends Controller
 {
-    // view page
+    /** view page */
     public function index()
     {
         $user_id = Auth::User()->user_id;
         Session::put('user_id', $user_id);
 
-        $indicator = DB::table('performance_indicator_lists')->get();
+        $indicator   = DB::table('performance_indicator_lists')->get();
         $departments = DB::table('departments')->get();
         $performance_indicators = DB::table('users')
-            ->join('performance_indicators', 'users.user_id', '=', 'performance_indicators.user_id')
-            ->select('users.*', 'performance_indicators.*')
-            ->get(); 
+            ->join('performance_indicators','users.user_id','performance_indicators.user_id')
+            ->select('users.*','performance_indicators.*')->get(); 
         return view('performance.performanceindicator',compact('indicator','departments','performance_indicators'));
     }
 
-    //performance
+    /** performance */
     public function performance()
     {
-       
         return view('performance.performance');
     }
 
-    //performance appraisal view page
+    /** performance appraisal view page */
     public function performanceAppraisal()
     {
-        $users = DB::table('users')->get();
-        $indicator = DB::table('performance_indicator_lists')->get();
+        $users      = DB::table('users')->get();
+        $indicator  = DB::table('performance_indicator_lists')->get();
         $appraisals = DB::table('users')
-        ->join('performance_appraisals', 'users.user_id', '=', 'performance_appraisals.user_id')
-        ->select('users.*', 'performance_appraisals.*')
-        ->get(); 
+                        ->join('performance_appraisals','users.user_id', 'performance_appraisals.user_id')
+                        ->select('users.*','performance_appraisals.*')->get(); 
         return view('performance.performanceappraisal',compact('users','indicator','appraisals'));
     }
 
-    // save record
+    /** save record */
     public function saveRecordIndicator(Request $request)
     {
         $request->validate([
@@ -101,7 +98,7 @@ class PerformanceController extends Controller
         }
     }
 
-    // update record
+    /** update record */
     public function updateIndicator(Request $request)
     {
         DB::beginTransaction();
@@ -128,8 +125,6 @@ class PerformanceController extends Controller
             ];
             performanceIndicator::where('id',$request->id)->update($update);
             DB::commit();
-            
-            DB::commit();
             Toastr::success('Performance indicator deleted successfully :)','Success');
             return redirect()->back();
         } catch(\Exception $e) {
@@ -139,24 +134,21 @@ class PerformanceController extends Controller
         }
     }
 
-    // delete record
+    /** delete record */
     public function deleteIndicator(Request $request)
     {
         try {
-
             performanceIndicator::destroy($request->id);
             Toastr::success('Performance indicator deleted successfully :)','Success');
             return redirect()->back();
-        
         } catch(\Exception $e) {
-
             DB::rollback();
             Toastr::error('Performance indicator delete fail :)','Error');
             return redirect()->back();
         }
     }
 
-    // saveRecord Appraisal
+    /** saveRecord Appraisal */
     public function saveRecordAppraisal(Request $request)
     {
         DB::beginTransaction();
@@ -193,29 +185,25 @@ class PerformanceController extends Controller
         }
     }
     
-    // delete record
+    /** delete record */
     public function deleteAppraisal(Request $request)
     {
         try {
-
             performance_appraisal::destroy($request->id);
             Toastr::success('Performance Appraisal deleted successfully :)','Success');
             return redirect()->back();
-        
         } catch(\Exception $e) {
-
             DB::rollback();
             Toastr::error('Performance Appraisal delete fail :)','Error');
             return redirect()->back();
         }
     }
 
-    //updateAppraisal
+    /** updateAppraisal */
     public function updateAppraisal(Request $request)
     {
         DB::beginTransaction();
         try {
-
             $update = [
                 'id'                        => $request->id,
                 'date'                      => $request->date,
@@ -245,5 +233,4 @@ class PerformanceController extends Controller
             return redirect()->back();
         }
     }
-
 }

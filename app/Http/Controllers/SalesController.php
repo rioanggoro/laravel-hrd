@@ -16,10 +16,8 @@ class SalesController extends Controller
     {
         $estimates     = DB::table('estimates')->get();
         $estimatesJoin = DB::table('estimates')
-            ->join('estimates_adds', 'estimates.estimate_number', '=', 'estimates_adds.estimate_number')
-            ->select('estimates.*', 'estimates_adds.*')
-            ->get();
-
+            ->join('estimates_adds','estimates.estimate_number','estimates_adds.estimate_number')
+            ->select('estimates.*','estimates_adds.*')->get();
         return view('sales.estimates',compact('estimates','estimatesJoin'));
     }
 
@@ -32,12 +30,10 @@ class SalesController extends Controller
     /** page edit estimates */
     public function editEstimateIndex($estimate_number)
     {
-        $estimates          = DB::table('estimates') ->where('estimate_number',$estimate_number)->first();
+        $estimates     = DB::table('estimates') ->where('estimate_number',$estimate_number)->first();
         $estimatesJoin = DB::table('estimates')
-            ->join('estimates_adds', 'estimates.estimate_number', '=', 'estimates_adds.estimate_number')
-            ->select('estimates.*', 'estimates_adds.*')
-            ->where('estimates_adds.estimate_number',$estimate_number)
-            ->get();
+            ->join('estimates_adds', 'estimates.estimate_number','estimates_adds.estimate_number')
+            ->select('estimates.*', 'estimates_adds.*')->where('estimates_adds.estimate_number',$estimate_number)->get();
         return view('sales.editestimate',compact('estimates','estimatesJoin'));
     }
 
@@ -45,10 +41,8 @@ class SalesController extends Controller
     public function viewEstimateIndex($estimate_number)
     {
         $estimatesJoin = DB::table('estimates')
-            ->join('estimates_adds', 'estimates.estimate_number', '=', 'estimates_adds.estimate_number')
-            ->select('estimates.*', 'estimates_adds.*')
-            ->where('estimates_adds.estimate_number',$estimate_number)
-            ->get();
+            ->join('estimates_adds','estimates.estimate_number','estimates_adds.estimate_number')
+            ->select('estimates.*','estimates_adds.*')->where('estimates_adds.estimate_number',$estimate_number)->get();
         return view('sales.estimateview',compact('estimatesJoin'));
     }
 
@@ -56,7 +50,7 @@ class SalesController extends Controller
     public function createEstimateSaveRecord(Request $request)
     {
         $request->validate([
-            'client'   => 'required|string|max:255',
+            'client' => 'required|string|max:255',
         ]);
 
         DB::beginTransaction();
@@ -108,7 +102,6 @@ class SalesController extends Controller
     {
         DB::beginTransaction();
         try {
-           
             $update = [
                 'id'                => $request->id,
                 'client'            => $request->client,
@@ -158,13 +151,10 @@ class SalesController extends Controller
     {
         DB::beginTransaction();
         try {
-
             EstimatesAdd::destroy($request->id);
-
             DB::commit();
             Toastr::success('Estimates deleted successfully :)','Success');
             return redirect()->back();
-            
         } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Estimates deleted fail :)','Error');
@@ -186,11 +176,9 @@ class SalesController extends Controller
 
             /** delete record table estimates */
             Estimates::destroy($request->id);
-
             DB::commit();
             Toastr::success('Estimates deleted successfully :)','Success');
             return redirect()->back();
-            
         } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Estimates deleted fail :)','Error');
@@ -212,7 +200,7 @@ class SalesController extends Controller
         return view('sales.expenses',compact('data'));
     }
 
-    // save record
+    /** save record */
     public function saveRecord(Request $request)
     {
         $request->validate([
@@ -253,7 +241,7 @@ class SalesController extends Controller
         }
     }
 
-    // update
+    /** update record */
     public function updateRecord( Request $request)
     {
         DB::beginTransaction();

@@ -19,6 +19,7 @@ use Hash;
 
 class UserManagementController extends Controller
 {
+    /** index page */
     public function index()
     {
         if (Auth::user()->role_name=='Admin')
@@ -36,7 +37,8 @@ class UserManagementController extends Controller
         }
         
     }
-    // search user
+
+    /** search user */
     public function searchUser(Request $request)
     {
         if (Auth::user()->role_name=='Admin')
@@ -108,20 +110,21 @@ class UserManagementController extends Controller
     
     }
 
-    // use activity log
+    /** use activity log */
     public function activityLog()
     {
         $activityLog = DB::table('user_activity_logs')->get();
         return view('usermanagement.user_activity_log',compact('activityLog'));
     }
-    // activity log
+
+    /** activity log */
     public function activityLogInLogOut()
     {
         $activityLog = DB::table('activity_logs')->get();
         return view('usermanagement.activity_log',compact('activityLog'));
     }
 
-    // profile user
+    /** profile user */
     public function profile()
     {   
 
@@ -151,14 +154,14 @@ class UserManagementController extends Controller
         }
     }
 
-    // save profile information
+    /** save profile information */
     public function profileInformation(Request $request)
     {
         try {
             if(!empty($request->images))
             {
                 $image_name = $request->hidden_image;
-                $image = $request->file('images');
+                $image      = $request->file('images');
                 if($image_name =='photo_defaults.jpg')
                 {
                     if($image != '')
@@ -208,7 +211,7 @@ class UserManagementController extends Controller
         }
     }
    
-    // save new user
+    /** save new user */
     public function addNewUserSave(Request $request)
     {
         $request->validate([
@@ -253,7 +256,7 @@ class UserManagementController extends Controller
         }
     }
     
-    // update
+    /** update */
     public function update(Request $request)
     {
         DB::beginTransaction();
@@ -317,7 +320,8 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
-    // delete
+
+    /** delete */
     public function delete(Request $request)
     {
         $user = Auth::User();
@@ -364,13 +368,13 @@ class UserManagementController extends Controller
         }
     }
 
-    // view change password
+    /** view change password */
     public function changePasswordView()
     {
         return view('settings.changepassword');
     }
     
-    // change password in db
+    /** change password in db */
     public function changePasswordDB(Request $request)
     {
         $request->validate([
