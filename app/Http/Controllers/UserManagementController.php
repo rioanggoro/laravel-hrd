@@ -124,25 +124,29 @@ class UserManagementController extends Controller
     // profile user
     public function profile()
     {   
+
         $profile = Session::get('user_id'); // get user_id session
         $userInformation = PersonalInformation::where('user_id',$profile)->first(); // user information
         $user = DB::table('users')->get();
         $employees = DB::table('profile_information')->where('user_id',$profile)->first();
 
+        /** emergency contact in user profile */
+        $emergencyContact = UserEmergencyContact::where('user_id',Session::get('user_id'))->first();
+
         if(empty($employees))
         {
             $information = DB::table('profile_information')->where('user_id',$profile)->first();
-            return view('usermanagement.profile_user',compact('information','user','userInformation'));
+            return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
 
         } else {
             $user_id = $employees->user_id;
             if($user_id == $profile)
             {
                 $information = DB::table('profile_information')->where('user_id',$profile)->first();
-                return view('usermanagement.profile_user',compact('information','user','userInformation'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
             } else {
                 $information = ProfileInformation::all();
-                return view('usermanagement.profile_user',compact('information','user','userInformation'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
             } 
         }
     }

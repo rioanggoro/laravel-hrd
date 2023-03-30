@@ -227,25 +227,40 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Emergency Contact -->
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
-                                    <h3 class="card-title">Emergency Contact <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal"><i class="fa fa-pencil"></i></a></h3>
+                                    <h3 class="card-title">Emergency Contact
+                                        <a href="#" class="edit-icon" data-toggle="modal" data-target="#emergency_contact_modal">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </h3>
                                     <h5 class="section-title">Primary</h5>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">John Doe</div>
+                                            @if (!empty($emergencyContact->name_primary))
+                                            <div class="text">{{ $emergencyContact->name_primary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Father</div>
+                                            @if (!empty($emergencyContact->relationship_primary))
+                                            <div class="text">{{ $emergencyContact->relationship_primary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            @if (!empty($emergencyContact->phone_primary) && !empty($emergencyContact->phone_2_primary))
+                                            <div class="text">{{ $emergencyContact->phone_primary }},{{ $emergencyContact->phone_2_primary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                     </ul>
                                     <hr>
@@ -253,15 +268,27 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">Karen Wills</div>
+                                            @if (!empty($emergencyContact->name_secondary))
+                                            <div class="text">{{ $emergencyContact->name_secondary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Brother</div>
+                                            @if (!empty($emergencyContact->relationship_secondary))
+                                            <div class="text">{{ $emergencyContact->relationship_secondary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            @if (!empty($emergencyContact->phone_secondary) && !empty($emergencyContact->phone_2_secondary))
+                                            <div class="text">{{ $emergencyContact->phone_secondary }},{{ $emergencyContact->phone_2_secondary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>
