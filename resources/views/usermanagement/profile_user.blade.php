@@ -294,7 +294,7 @@
                                 </div>
                             </div>
                         </div>
-                         <!-- End Emergency Contact -->
+                        <!-- End Emergency Contact -->
                     </div>
 
                     <div class="row">
@@ -1452,25 +1452,42 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
+                                                @if (!empty($emergencyContact->name_primary))
+                                                <input type="text" class="form-control" name="name_primary" value="{{ $emergencyContact->name_primary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="name_primary">
+                                                @endif
+                                            </li>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
+                                                @if (!empty($emergencyContact->relationship_primary))
+                                                <input type="text" class="form-control" name="relationship_primary" value="{{ $emergencyContact->relationship_primary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="relationship_primary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone <span class="text-danger">*</span></label>
+                                                @if (!empty($emergencyContact->phone_primary))
+                                                <input type="text" class="form-control" name="phone_primary" value="{{ $emergencyContact->phone_primary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="phone_primary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone 2</label>
+                                                @if (!empty($emergencyContact->phone_2_primary))
+                                                <input type="text" class="form-control" name="phone_2_primary" value="{{ $emergencyContact->phone_2_primary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="phone_2_primary">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -1484,25 +1501,41 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
+                                                @if (!empty($emergencyContact->name_secondary))
+                                                <input type="text" class="form-control" name="name_secondary" value="{{ $emergencyContact->name_secondary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="name_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
+                                                @if (!empty($emergencyContact->relationship_secondary))
+                                                <input type="text" class="form-control" name="relationship_secondary" value="{{ $emergencyContact->relationship_secondary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="relationship_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone <span class="text-danger">*</span></label>
+                                                @if (!empty($emergencyContact->phone_secondary))
+                                                <input type="text" class="form-control" name="phone_secondary" value="{{ $emergencyContact->phone_secondary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="phone_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone 2</label>
+                                                @if (!empty($emergencyContact->phone_2_secondary))
+                                                <input type="text" class="form-control" name="phone_2_secondary" value="{{ $emergencyContact->phone_2_secondary }}">
+                                                @else
                                                 <input type="text" class="form-control" name="phone_2_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
