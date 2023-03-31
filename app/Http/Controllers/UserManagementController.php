@@ -19,6 +19,7 @@ use Hash;
 
 class UserManagementController extends Controller
 {
+    /** index page */
     public function index()
     {
         if (Auth::user()->role_name=='Admin')
@@ -36,7 +37,8 @@ class UserManagementController extends Controller
         }
         
     }
-    // search user
+
+    /** search user */
     public function searchUser(Request $request)
     {
         if (Auth::user()->role_name=='Admin')
@@ -108,53 +110,58 @@ class UserManagementController extends Controller
     
     }
 
-    // use activity log
+    /** use activity log */
     public function activityLog()
     {
         $activityLog = DB::table('user_activity_logs')->get();
         return view('usermanagement.user_activity_log',compact('activityLog'));
     }
-    // activity log
+
+    /** activity log */
     public function activityLogInLogOut()
     {
         $activityLog = DB::table('activity_logs')->get();
         return view('usermanagement.activity_log',compact('activityLog'));
     }
 
-    // profile user
+    /** profile user */
     public function profile()
     {   
+
         $profile = Session::get('user_id'); // get user_id session
         $userInformation = PersonalInformation::where('user_id',$profile)->first(); // user information
         $user = DB::table('users')->get();
         $employees = DB::table('profile_information')->where('user_id',$profile)->first();
 
+        /** emergency contact in user profile */
+        $emergencyContact = UserEmergencyContact::where('user_id',Session::get('user_id'))->first();
+
         if(empty($employees))
         {
             $information = DB::table('profile_information')->where('user_id',$profile)->first();
-            return view('usermanagement.profile_user',compact('information','user','userInformation'));
+            return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
 
         } else {
             $user_id = $employees->user_id;
             if($user_id == $profile)
             {
                 $information = DB::table('profile_information')->where('user_id',$profile)->first();
-                return view('usermanagement.profile_user',compact('information','user','userInformation'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
             } else {
                 $information = ProfileInformation::all();
-                return view('usermanagement.profile_user',compact('information','user','userInformation'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
             } 
         }
     }
 
-    // save profile information
+    /** save profile information */
     public function profileInformation(Request $request)
     {
         try {
             if(!empty($request->images))
             {
                 $image_name = $request->hidden_image;
-                $image = $request->file('images');
+                $image      = $request->file('images');
                 if($image_name =='photo_defaults.jpg')
                 {
                     if($image != '')
@@ -204,7 +211,7 @@ class UserManagementController extends Controller
         }
     }
    
-    // save new user
+    /** save new user */
     public function addNewUserSave(Request $request)
     {
         $request->validate([
@@ -249,7 +256,7 @@ class UserManagementController extends Controller
         }
     }
     
-    // update
+    /** update */
     public function update(Request $request)
     {
         DB::beginTransaction();
@@ -313,7 +320,8 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
-    // delete
+
+    /** delete */
     public function delete(Request $request)
     {
         $user = Auth::User();
@@ -360,13 +368,13 @@ class UserManagementController extends Controller
         }
     }
 
-    // view change password
+    /** view change password */
     public function changePasswordView()
     {
         return view('settings.changepassword');
     }
     
-    // change password in db
+    /** change password in db */
     public function changePasswordDB(Request $request)
     {
         $request->validate([
