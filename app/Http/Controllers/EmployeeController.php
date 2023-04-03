@@ -333,8 +333,6 @@ class EmployeeController extends Controller
                 ->leftJoin('personal_information','personal_information.user_id','users.user_id')
                 ->leftJoin('profile_information','profile_information.user_id','users.user_id')
                 ->where('users.user_id',$user_id)->first();
-        dd($users);
-
         $user = DB::table('users')
                 ->leftJoin('personal_information','personal_information.user_id','users.user_id')
                 ->leftJoin('profile_information','profile_information.user_id','users.user_id')

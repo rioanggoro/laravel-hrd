@@ -342,11 +342,15 @@ class UserManagementController extends Controller
 
             DB::table('user_activity_logs')->insert($activityLog);
 
-            if ($request->avatar == 'photo_defaults.jpg') {
+            if ($request->avatar == 'photo_defaults.jpg') { /** remove all information user */
                 User::destroy($request->id);
+                PersonalInformation::destroy($request->id);
+                UserEmergencyContact::destroy($request->id);
             } else {
                 User::destroy($request->id);
                 unlink('assets/images/'.$request->avatar);
+                PersonalInformation::destroy($request->id);
+                UserEmergencyContact::destroy($request->id);
             }
 
             DB::commit();
