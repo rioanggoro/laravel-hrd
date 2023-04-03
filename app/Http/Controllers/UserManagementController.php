@@ -256,7 +256,7 @@ class UserManagementController extends Controller
         }
     }
     
-    /** update */
+    /** update record */
     public function update(Request $request)
     {
         DB::beginTransaction();
@@ -321,47 +321,38 @@ class UserManagementController extends Controller
         }
     }
 
-    /** delete */
+    /** delete record */
     public function delete(Request $request)
     {
-        $user = Auth::User();
-        Session::put('user', $user);
-        $user=Session::get('user');
         DB::beginTransaction();
-        try{
-            $fullName     = $user->name;
-            $email        = $user->email;
-            $phone_number = $user->phone_number;
-            $status       = $user->status;
-            $role_name    = $user->role_name;
+        try {
 
-            $dt       = Carbon::now();
+            $dt        = Carbon::now();
             $todayDate = $dt->toDayDateTimeString();
 
             $activityLog = [
-
-                'user_name'    => $fullName,
-                'email'        => $email,
-                'phone_number' => $phone_number,
-                'status'       => $status,
-                'role_name'    => $role_name,
+                'user_name'    => Session::get('name'),
+                'email'        => Session::get('email'),
+                'phone_number' => Session::get('phone_number'),
+                'status'       => Session::get('status'),
+                'role_name'    => Session::get('role_name'),
                 'modify_user'  => 'Delete',
                 'date_time'    => $todayDate,
             ];
 
             DB::table('user_activity_logs')->insert($activityLog);
 
-            if($request->avatar =='photo_defaults.jpg'){
+            if ($request->avatar == 'photo_defaults.jpg') {
                 User::destroy($request->id);
-            }else{
+            } else {
                 User::destroy($request->id);
                 unlink('assets/images/'.$request->avatar);
             }
+
             DB::commit();
             Toastr::success('User deleted successfully :)','Success');
-            return redirect()->route('userManagement');
-            
-        }catch(\Exception $e){
+           return redirect()->back();
+        } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('User deleted fail :)','Error');
             return redirect()->back();
