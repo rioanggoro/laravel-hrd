@@ -275,8 +275,12 @@ class UserManagementController extends Controller
             $image_name = $request->hidden_image;
             $image = $request->file('images');
             if($image_name =='photo_defaults.jpg') {
-                $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('/assets/images/'), $image_name);
+                if (empty($image)) {
+                    $image_name = $image_name;
+                } else {
+                    $image_name = rand() . '.' . $image->getClientOriginalExtension();
+                    $image->move(public_path('/assets/images/'), $image_name);
+                }
             } else {
                 if (!empty($image)) {
                     unlink('assets/images/'.$image_name);
