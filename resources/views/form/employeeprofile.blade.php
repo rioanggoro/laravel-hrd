@@ -25,18 +25,18 @@
                             <div class="profile-view">
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
-                                        <a href="#"><img alt="" src="{{ URL::to('/assets/images/'. $user[0]->avatar) }}" alt="{{ $user[0]->name }}"></a>
+                                        <a href="#"><img alt="" src="{{ URL::to('/assets/images/'. $users->avatar) }}" alt="{{ $users->name }}"></a>
                                     </div>
                                 </div>
                                 <div class="profile-basic">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
-                                                <h3 class="user-name m-t-0 mb-0">{{ $user[0]->name }}</h3>
-                                                <h6 class="text-muted"> {{ $user[0]->department }}</h6>
-                                                <small class="text-muted">{{ $user[0]->position }}</small>
-                                                <div class="staff-id">Employee ID : {{ $user[0]->user_id }}</div>
-                                                <div class="small doj text-muted">Date of Join : {{ $user[0]->join_date }}</div>
+                                                <h3 class="user-name m-t-0 mb-0">{{ $users->name }}</h3>
+                                                <h6 class="text-muted"> {{ $users->department }}</h6>
+                                                <small class="text-muted">{{ $users->position }}</small>
+                                                <div class="staff-id">Employee ID : {{ $users->user_id }}</div>
+                                                <div class="small doj text-muted">Date of Join : {{ $users->join_date }}</div>
                                                 <div class="staff-msg"><a class="btn btn-custom" href="chat.html">Send Message</a></div>
                                             </div>
                                         </div>
@@ -44,50 +44,63 @@
                                             <ul class="personal-info">
                                                 <li>
                                                     <div class="title">Phone:</div>
-                                                    <div class="text"><a href="">{{ $user[0]->phone_number }}</a></div>
+                                                    <div class="text">
+                                                        @if(!empty($users->phone_number))
+                                                            <a>{{ $users->phone_number }}</a>
+                                                        @else
+                                                            <a>N/A</a>
+                                                        @endif
+                                                    </div>
                                                 </li>
                                                 <li>
                                                     <div class="title">Email:</div>
-                                                    <div class="text"><a href="">{{ $user[0]->email }}</a></div>
+                                                    <div class="text">
+                                                        @if(!empty($users->email))
+                                                        <a>{{ $users->email }}</a>
+                                                        @else
+                                                            <a>N/A</a>
+                                                        @endif
+                                                    </div>
                                                 </li>
                                                 <li>
-                                                    @if(!empty($users))
-                                                        <div class="title">Birthday:</div>
-                                                        <div class="text">{{ $users->birth_date }}</div>
-                                                    @else
-                                                        <div class="title">Birthday:</div>
-                                                        <div class="text">N/A</div>
-                                                    @endif
+                                                    <div class="title">Birthday:</div>
+                                                    <div class="text">
+                                                        @if(!empty($users->birth_date))
+                                                        <a>{{ $users->birth_date }}</a>
+                                                        @else
+                                                            <a>N/A</a>
+                                                        @endif
+                                                    </div>
                                                 </li>
                                                 <li>
-                                                    @if(!empty($users))
-                                                        <div class="title">Address:</div>
-                                                        <div class="text">{{ $users->address }}</div>
-                                                    @else
-                                                        <div class="title">Address:</div>
-                                                        <div class="text">N/A</div>
-                                                    @endif
+                                                    <div class="title">Address:</div>
+                                                    <div class="text">
+                                                        @if(!empty($users->address))
+                                                        <a>{{ $users->address }}</a>
+                                                        @else
+                                                            <a>N/A</a>
+                                                        @endif
+                                                    </div>
                                                 </li>
                                                 <li>
-                                                    @if(!empty($users))
-                                                        <div class="title">Gender:</div>
-                                                        <div class="text">{{ $users->gender }}</div>
-                                                    @else
-                                                        <div class="title">Gender:</div>
-                                                        <div class="text">N/A</div>
-                                                    @endif
+                                                    <div class="title">Gender:</div>
+                                                    <div class="text">
+                                                        @if(!empty($users->gender))
+                                                        <a>{{ $users->gender }}</a>
+                                                        @else
+                                                            <a>N/A</a>
+                                                        @endif
+                                                    </div>
                                                 </li>
                                                 <li>
                                                     <div class="title">Reports to:</div>
                                                     <div class="text">
                                                         <div class="avatar-box">
                                                             <div class="avatar avatar-xs">
-                                                                <img src="{{ URL::to('/assets/images/'. $user[0]->avatar) }}" alt="{{ $user[0]->name }}">
+                                                                <img src="{{ URL::to('/assets/images/'. $users->avatar) }}" alt="{{ $users->name }}">
                                                             </div>
                                                         </div>
-                                                        <a href="profile.html">
-                                                            {{ $user[0]->name }}
-                                                        </a>
+                                                        <a>{{ $users->name }}</a>
                                                     </div>
                                                 </li> 
                                             </ul>
@@ -124,35 +137,67 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Passport No.</div>
-                                            <div class="text">{{ $users->passport_no }}</div>
+                                            @if (!empty($users->passport_no))
+                                                <div class="text">{{ $users->passport_no }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Passport Exp Date.</div>
-                                            <div class="text">{{ $users->passport_expiry_date }}</div>
+                                            @if (!empty($users->passport_expiry_date))
+                                                <div class="text">{{ $users->passport_expiry_date }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Tel</div>
-                                            <div class="text"><a href="">{{ $users->tel }}</a></div>
+                                            @if (!empty($users->tel))
+                                                <div class="text">{{ $users->tel }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Nationality</div>
-                                            <div class="text">{{ $users->nationality }}</div>
+                                            @if (!empty($users->nationality))
+                                                <div class="text">{{ $users->nationality }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Religion</div>
-                                            <div class="text">{{ $users->religion }}</div>
+                                            @if (!empty($users->religion))
+                                                <div class="text">{{ $users->religion }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Marital status</div>
-                                            <div class="text">{{ $users->marital_status }}</div>
+                                            @if (!empty($users->marital_status))
+                                                <div class="text">{{ $users->marital_status }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Employment of spouse</div>
-                                            <div class="text">{{ $users->employment_of_spouse }}</div>
+                                            @if (!empty($users->employment_of_spouse))
+                                                <div class="text">{{ $users->employment_of_spouse }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">No. of children</div>
-                                            <div class="text">{{ $users->children }}</div>
+                                            @if ($users->children != null)
+                                                <div class="text">{{ $users->children }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>
@@ -166,15 +211,27 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">John Doe</div>
+                                            @if (!empty($users->name_primary))
+                                            <div class="text">{{ $users->name_primary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Father</div>
+                                            @if (!empty($users->relationship_primary))
+                                            <div class="text">{{ $users->relationship_primary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            @if (!empty($users->phone_primary) && !empty($users->phone_2_primary))
+                                            <div class="text">{{ $users->phone_primary }},{{ $users->phone_2_primary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                     </ul>
                                     <hr>
@@ -182,15 +239,27 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Name</div>
-                                            <div class="text">Karen Wills</div>
+                                            @if (!empty($users->name_secondary))
+                                            <div class="text">{{ $users->name_secondary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Relationship</div>
-                                            <div class="text">Brother</div>
+                                            @if (!empty($users->relationship_secondary))
+                                            <div class="text">{{ $users->relationship_secondary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Phone </div>
-                                            <div class="text">9876543210, 9876543210</div>
+                                            @if (!empty($users->phone_secondary) && !empty($users->phone_2_secondary))
+                                            <div class="text">{{ $users->phone_secondary }},{{ $users->phone_2_secondary }}</div>
+                                            @else
+                                            <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>
@@ -834,12 +903,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="profile-img-wrap edit-img">
-                                        <img class="inline-block" src="{{ URL::to('/assets/images/'. $user[0]->avatar) }}" alt="{{ $user[0]->name }}">
+                                        <img class="inline-block" src="{{ URL::to('/assets/images/'. $users->avatar) }}" alt="{{ $users->name }}">
                                         <div class="fileupload btn">
                                             <span class="btn-text">edit</span>
                                             <input class="upload" type="file" id="image" name="images">
                                             @if(!empty($users))
-                                            <input type="hidden" name="hidden_image" id="e_image" value="{{ $user[0]->avatar }}">
+                                            <input type="hidden" name="hidden_image" id="e_image" value="{{ $users->avatar }}">
                                             @endif
                                         </div>
                                     </div>
@@ -847,9 +916,9 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ $user[0]->name }}">
-                                                <input type="text" class="form-control" id="user_id" name="user_id" value="{{ $user[0]->user_id }}">
-                                                <input type="hidden" class="form-control" id="email" name="email" value="{{ $user[0]->email }}">
+                                                <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}">
+                                                <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ $users->user_id }}">
+                                                <input type="hidden" class="form-control" id="email" name="email" value="{{ $users->email }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -1179,7 +1248,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="validation" action="{{ route('user/profile/emergency/contact/save') }}" method="POST">
+                            @csrf
+                            <input type="text" class="form-control" name="user_id" value="{{ $users->user_id }}">
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Primary Contact</h3>
@@ -1187,25 +1258,42 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                                                @if (!empty($users->name_primary))
+                                                <input type="text" class="form-control" name="name_primary" value="{{ $users->name_primary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="name_primary">
+                                                @endif
+                                            </li>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                @if (!empty($users->relationship_primary))
+                                                <input type="text" class="form-control" name="relationship_primary" value="{{ $users->relationship_primary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="relationship_primary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                @if (!empty($users->phone_primary))
+                                                <input type="text" class="form-control" name="phone_primary" value="{{ $users->phone_primary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="phone_primary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                                @if (!empty($users->phone_2_primary))
+                                                <input type="text" class="form-control" name="phone_2_primary" value="{{ $users->phone_2_primary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="phone_2_primary">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -1214,37 +1302,53 @@
                             
                             <div class="card">
                                 <div class="card-body">
-                                    <h3 class="card-title">Primary Contact</h3>
+                                    <h3 class="card-title">Secondary Contact</h3>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control">
+                                                @if (!empty($users->name_secondary))
+                                                <input type="text" class="form-control" name="name_secondary" value="{{ $users->name_secondary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="name_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Relationship <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                @if (!empty($users->relationship_secondary))
+                                                <input type="text" class="form-control" name="relationship_secondary" value="{{ $users->relationship_secondary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="relationship_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text">
+                                                @if (!empty($users->phone_secondary))
+                                                <input type="text" class="form-control" name="phone_secondary" value="{{ $users->phone_secondary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="phone_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone 2</label>
-                                                <input class="form-control" type="text">
+                                                @if (!empty($users->phone_2_secondary))
+                                                <input type="text" class="form-control" name="phone_2_secondary" value="{{ $users->phone_2_secondary }}">
+                                                @else
+                                                <input type="text" class="form-control" name="phone_2_secondary">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
+                                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -1485,6 +1589,36 @@
         </div>
         <!-- /Experience Modal -->
 
-        <!-- /Page Content -->
+    <!-- /Page Content -->
     </div>
+
+    @section('script')
+    <script>
+        $('#validation').validate({  
+            rules: {  
+                name_primary: 'required',  
+                relationship_primary: 'required',  
+                phone_primary: 'required',  
+                phone_2_primary: 'required',  
+                name_secondary: 'required',  
+                relationship_secondary: 'required',  
+                phone_secondary: 'required',  
+                phone_2_secondary: 'required',  
+            },  
+            messages: {
+                name_primary: 'Please input name primary',  
+                relationship_primary: 'Please input relationship primary',  
+                phone_primary: 'Please input phone primary',  
+                phone_2_primary: 'Please input phone 2 primary',  
+                name_secondary: 'Please input name secondary',  
+                relationship_secondary: 'Please input relationship secondary',  
+                phone_secondaryr: 'Please input phone secondary',  
+                phone_2_secondary: 'Please input phone 2 secondary',  
+            },  
+            submitHandler: function(form) {  
+                form.submit();
+            }  
+        });  
+    </script>
+    @endsection
 @endsection
