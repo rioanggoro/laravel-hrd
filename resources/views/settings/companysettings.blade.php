@@ -30,7 +30,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Contact Person</label>
-                                    <input class="form-control" name="contact_person" value="Soeng Souy" type="text">
+                                    <input type="text" class="form-control" name="contact_person" value="Soeng Souy">
                                 </div>
                             </div>
                         </div>
@@ -38,16 +38,16 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input class="form-control" name="address" value="3864 Bld 110 PP, CA, 91403" type="text">
+                                    <input type="text" class="form-control" name="address" value="3864 Bld 110 PP, CA, 91403">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-3">
                                 <div class="form-group">
                                     <label>Country</label>
                                     <select class="form-control select" name="country">
-                                        <option>KHMER</option>
-                                        <option>USA</option>
-                                        <option>United Kingdom</option>
+                                        <option value="KHMER">KHMER</option>
+                                        <option value="USA">USA</option>
+                                        <option value="United Kingdom">United Kingdom</option>
                                     </select>
                                 </div>
                             </div>
@@ -61,10 +61,10 @@
                                 <div class="form-group">
                                     <label>State/Province</label>
                                     <select class="form-control select" name="state_province">
-                                        <option>Phnom Penh</option>
-                                        <option>Pursat</option>
-                                        <option>Kan dal</option>
-                                        <option>Ta Keav</option>
+                                        <option value="Phnom Penh">Phnom Penh</option>
+                                        <option value="Pursat">Pursat</option>
+                                        <option value="Kan dal">Kan dal</option>
+                                        <option value="Ta Keav">Ta Keav</option>
                                     </select>
                                 </div>
                             </div>
