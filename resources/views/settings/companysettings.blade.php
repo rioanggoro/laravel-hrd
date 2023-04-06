@@ -1,5 +1,7 @@
 @extends('layouts.settings')
 @section('content')
+    {{-- message --}}
+    {!! Toastr::message() !!}
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Page Content -->
@@ -15,7 +17,9 @@
                         </div>
                     </div>
                     <!-- /Page Header -->
-                    <form>
+                    <form action="{{ route('company/settings/save') }}" method="POST">
+                        @csrf
+                        <input type="hidden" class="form-control" name="id" value="1">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
