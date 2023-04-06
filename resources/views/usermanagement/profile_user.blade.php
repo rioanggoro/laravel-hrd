@@ -152,81 +152,77 @@
                                 <div class="card-body">
                                     <!-- Personal Informations -->
                                     <h3 class="card-title">Personal Informations <a href="#" class="edit-icon" data-toggle="modal" data-target="#personal_info_modal"><i class="fa fa-pencil"></i></a></h3>
-                                    @if (!empty($userInformation))
-                                        <ul class="personal-info">
-                                            <li>
-                                                <div class="title">Passport No.</div>
-                                                <div class="text">{{ $userInformation->passport_no }}</div>
-                                            </li>
-                                            <li>
-                                                <div class="title">Passport Exp Date.</div>
-                                                <div class="text">{{ $userInformation->passport_expiry_date }}</div>
-                                            </li>
-                                            <li>
-                                                <div class="title">Tel</div>
-                                                <div class="text"><a href="">{{ $userInformation->tel }}</a></div>
-                                            </li>
-                                            <li>
-                                                <div class="title">Nationality</div>
-                                                <div class="text">{{ $userInformation->nationality }}</div>
-                                            </li>
-                                            <li>
-                                                <div class="title">Religion</div>
-                                                <div class="text">{{ $userInformation->religion }}</div>
-                                            </li>
-                                            <li>
-                                                <div class="title">Marital status</div>
-                                                <div class="text">{{ $userInformation->marital_status }}</div>
-                                            </li>
-                                            <li>
-                                                <div class="title">Employment of spouse</div>
-                                                <div class="text">{{ $userInformation->employment_of_spouse }}</div>
-                                            </li>
-                                            <li>
-                                                <div class="title">No. of children</div>
-                                                <div class="text">{{ $userInformation->children }}</div>
-                                            </li>
-                                        </ul>
-                                    @else
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Passport No.</div>
-                                            <div class="text">N/A</div>
+                                            @if (!empty($userInformation->passport_no))
+                                                <div class="text">{{ $userInformation->passport_no }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Passport Exp Date.</div>
-                                            <div class="text">N/A</div>
+                                            @if (!empty($userInformation->passport_expiry_date))
+                                                <div class="text">{{ $userInformation->passport_expiry_date }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Tel</div>
-                                            <div class="text"><a href="">N/A</a></div>
+                                            @if (!empty($userInformation->tel))
+                                                <div class="text">{{ $userInformation->tel }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Nationality</div>
-                                            <div class="text">N/A</div>
+                                            @if (!empty($userInformation->nationality))
+                                                <div class="text">{{ $userInformation->nationality }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Religion</div>
-                                            <div class="text">N/A</div>
+                                            @if (!empty($userInformation->religion))
+                                                <div class="text">{{ $userInformation->religion }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Marital status</div>
-                                            <div class="text">N/A</div>
+                                            @if (!empty($userInformation->marital_status))
+                                                <div class="text">{{ $userInformation->marital_status }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Employment of spouse</div>
-                                            <div class="text">N/A</div>
+                                            @if (!empty($userInformation->employment_of_spouse))
+                                                <div class="text">{{ $userInformation->employment_of_spouse }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">No. of children</div>
-                                            <div class="text">N/A</div>
+                                            @if (!empty($userInformation->children))
+                                                <div class="text">{{ $userInformation->children }}</div>
+                                            @else
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                     </ul>
-                                    @endif
                                     <!-- End Personal Informations -->
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- Emergency Contact -->
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">

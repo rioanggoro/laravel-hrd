@@ -127,7 +127,6 @@ class UserManagementController extends Controller
     /** profile user */
     public function profile()
     {   
-
         $profile = Session::get('user_id'); // get user_id session
         $userInformation = PersonalInformation::where('user_id',$profile)->first(); // user information
         $user = DB::table('users')->get();
@@ -275,8 +274,12 @@ class UserManagementController extends Controller
             $image_name = $request->hidden_image;
             $image = $request->file('images');
             if($image_name =='photo_defaults.jpg') {
-                $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('/assets/images/'), $image_name);
+                if (empty($image)) {
+                    $image_name = $image_name;
+                } else {
+                    $image_name = rand() . '.' . $image->getClientOriginalExtension();
+                    $image->move(public_path('/assets/images/'), $image_name);
+                }
             } else {
                 if (!empty($image)) {
                     unlink('assets/images/'.$image_name);
@@ -342,11 +345,15 @@ class UserManagementController extends Controller
 
             DB::table('user_activity_logs')->insert($activityLog);
 
-            if ($request->avatar == 'photo_defaults.jpg') {
+            if ($request->avatar == 'photo_defaults.jpg') { /** remove all information user */
                 User::destroy($request->id);
+                PersonalInformation::destroy($request->id);
+                UserEmergencyContact::destroy($request->id);
             } else {
                 User::destroy($request->id);
                 unlink('assets/images/'.$request->avatar);
+                PersonalInformation::destroy($request->id);
+                UserEmergencyContact::destroy($request->id);
             }
 
             DB::commit();

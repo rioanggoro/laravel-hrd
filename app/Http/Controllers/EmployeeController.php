@@ -329,16 +329,29 @@ class EmployeeController extends Controller
     /** employee profile with all controller user */
     public function profileEmployee($user_id)
     {
-        $users = DB::table('users')
-                ->leftJoin('personal_information','personal_information.user_id','users.user_id')
-                ->leftJoin('profile_information','profile_information.user_id','users.user_id')
-                ->where('users.user_id',$user_id)->first();
-        dd($users);
-
-        $user = DB::table('users')
-                ->leftJoin('personal_information','personal_information.user_id','users.user_id')
-                ->leftJoin('profile_information','profile_information.user_id','users.user_id')
+        $user = DB::table('users') 
+                ->leftJoin('personal_information as pi','pi.user_id','users.user_id')
+                ->leftJoin('profile_information as pr','pr.user_id','users.user_id')
+                ->leftJoin('user_emergency_contacts as ue','ue.user_id','users.user_id')
+                ->select('users.*','pi.passport_no','pi.passport_expiry_date','pi.tel',
+                'pi.nationality','pi.religion','pi.marital_status','pi.employment_of_spouse',
+                'pi.children','pr.birth_date','pr.gender','pr.address','pr.country','pr.state','pr.pin_code',
+                'pr.phone_number','pr.department','pr.designation','pr.reports_to',
+                'ue.name_primary','ue.relationship_primary','ue.phone_primary','ue.phone_2_primary',
+                'ue.name_secondary','ue.relationship_secondary','ue.phone_secondary','ue.phone_2_secondary')
                 ->where('users.user_id',$user_id)->get();
+        $users = DB::table('users')
+                ->leftJoin('personal_information as pi','pi.user_id','users.user_id')
+                ->leftJoin('profile_information as pr','pr.user_id','users.user_id')
+                ->leftJoin('user_emergency_contacts as ue','ue.user_id','users.user_id')
+                ->select('users.*','pi.passport_no','pi.passport_expiry_date','pi.tel',
+                'pi.nationality','pi.religion','pi.marital_status','pi.employment_of_spouse',
+                'pi.children','pr.birth_date','pr.gender','pr.address','pr.country','pr.state','pr.pin_code',
+                'pr.phone_number','pr.department','pr.designation','pr.reports_to',
+                'ue.name_primary','ue.relationship_primary','ue.phone_primary','ue.phone_2_primary',
+                'ue.name_secondary','ue.relationship_secondary','ue.phone_secondary','ue.phone_2_secondary')
+                ->where('users.user_id',$user_id)->first();
+
         return view('form.employeeprofile',compact('user','users'));
     }
 
