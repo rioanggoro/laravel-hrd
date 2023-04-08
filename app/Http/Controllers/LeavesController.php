@@ -10,17 +10,14 @@ use DateTime;
 
 class LeavesController extends Controller
 {
-    // leaves
+    /** leaves page */
     public function leaves()
     {
-        $leaves = DB::table('leaves_admins')
-                    ->join('users', 'users.user_id', '=', 'leaves_admins.user_id')
-                    ->select('leaves_admins.*', 'users.position','users.name','users.avatar')
-                    ->get();
-
-        return view('form.leaves',compact('leaves'));
+        $leaves = DB::table('leaves_admins')->join('users', 'users.user_id','leaves_admins.user_id')->select('leaves_admins.*', 'users.position','users.name','users.avatar')->get();
+        return view('employees.leaves',compact('leaves'));
     }
-    // save record
+
+    /** save record */
     public function saveRecord(Request $request)
     {
         $request->validate([
@@ -57,7 +54,7 @@ class LeavesController extends Controller
         }
     }
 
-    // edit record
+    /** edit record */
     public function editRecordLeave(Request $request)
     {
         DB::beginTransaction();
@@ -88,7 +85,7 @@ class LeavesController extends Controller
         }
     }
 
-    // delete record
+    /** delete record */
     public function deleteLeave(Request $request)
     {
         try {
@@ -105,39 +102,39 @@ class LeavesController extends Controller
         }
     }
 
-    // leaveSettings
+    /** leaveSettings page */
     public function leaveSettings()
     {
-        return view('form.leavesettings');
+        return view('employees.leavesettings');
     }
 
-    // attendance admin
+    /** attendance admin */
     public function attendanceIndex()
     {
-        return view('form.attendance');
+        return view('employees.attendance');
     }
 
-    // attendance employee
+    /** attendance employee */
     public function AttendanceEmployee()
     {
-        return view('form.attendanceemployee');
+        return view('employees.attendanceemployee');
     }
 
-    // leaves Employee
+    /** leaves Employee */
     public function leavesEmployee()
     {
-        return view('form.leavesemployee');
+        return view('employees.leavesemployee');
     }
 
-    // shiftscheduling
+    /** shift scheduling */
     public function shiftScheduLing()
     {
-        return view('form.shiftscheduling');
+        return view('employees.shiftscheduling');
     }
 
-    // shiftList
+    /** shiftList */
     public function shiftList()
     {
-        return view('form.shiftlist');
+        return view('employees.shiftlist');
     }
 }
