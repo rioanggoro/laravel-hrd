@@ -9,13 +9,14 @@ use DB;
 
 class HolidayController extends Controller
 {
-    // holidays
+    /** holidays page */
     public function holiday()
     {
         $holiday = Holiday::all();
-        return view('form.holidays',compact('holiday'));
+        return view('employees.holidays',compact('holiday'));
     }
-    // save record
+    
+    /** save record */
     public function saveRecord(Request $request)
     {
         $request->validate([
@@ -40,7 +41,8 @@ class HolidayController extends Controller
             return redirect()->back();
         }
     }
-    // update
+    
+    /** update record */
     public function updateRecord( Request $request)
     {
         DB::beginTransaction();

@@ -12,7 +12,7 @@ use App\Models\module_permission;
 
 class EmployeeController extends Controller
 {
-    // all employee card view
+    /** all employee card view */
     public function cardAllEmployee(Request $request)
     {
         $users = DB::table('users')
@@ -21,7 +21,7 @@ class EmployeeController extends Controller
                     ->get(); 
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
-        return view('form.allemployeecard',compact('users','userList','permission_lists'));
+        return view('employees.allemployeecard',compact('users','userList','permission_lists'));
     }
 
     /** all employee list */
@@ -33,10 +33,10 @@ class EmployeeController extends Controller
                     ->get();
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
-        return view('form.employeelist',compact('users','userList','permission_lists'));
+        return view('employees.employeelist',compact('users','userList','permission_lists'));
     }
 
-    //  save data employee
+    /** save data employee */
     public function saveRecord(Request $request)
     {
         $request->validate([
@@ -102,7 +102,7 @@ class EmployeeController extends Controller
             ->join('module_permissions','employees.employee_id','module_permissions.employee_id')
             ->select('employees.*','module_permissions.*')->where('employees.employee_id',$employee_id)->get();
         $employees = DB::table('employees')->where('employee_id',$employee_id)->get();
-        return view('form.edit.editemployee',compact('employees','permission'));
+        return view('employees.edit.editemployee',compact('employees','permission'));
     }
 
     /** update record employee */
@@ -249,7 +249,7 @@ class EmployeeController extends Controller
                         ->where('users.name','LIKE','%'.$request->name.'%')
                         ->where('users.position','LIKE','%'.$request->position.'%')->get();
         }
-        return view('form.allemployeecard',compact('users','userList','permission_lists'));
+        return view('employees.allemployeecard',compact('users','userList','permission_lists'));
     }
 
     /** list search employee */
@@ -323,7 +323,7 @@ class EmployeeController extends Controller
                         ->where('users.name','LIKE','%'.$request->name.'%')
                         ->where('users.position','LIKE','%'.$request->position.'%')->get();
         }
-        return view('form.employeelist',compact('users','userList','permission_lists'));
+        return view('employees.employeelist',compact('users','userList','permission_lists'));
     }
 
     /** employee profile with all controller user */
@@ -352,14 +352,14 @@ class EmployeeController extends Controller
                 'ue.name_secondary','ue.relationship_secondary','ue.phone_secondary','ue.phone_2_secondary')
                 ->where('users.user_id',$user_id)->first();
 
-        return view('form.employeeprofile',compact('user','users'));
+        return view('employees.employeeprofile',compact('user','users'));
     }
 
     /** page departments */
     public function index()
     {
         $departments = DB::table('departments')->get();
-        return view('form.departments',compact('departments'));
+        return view('employees.departments',compact('departments'));
     }
 
     /** save record department */
@@ -381,7 +381,7 @@ class EmployeeController extends Controller
     
                 DB::commit();
                 Toastr::success('Add new department successfully :)','Success');
-                return redirect()->route('form/departments/page');
+                return redirect()->back();
             } else {
                 DB::rollback();
                 Toastr::error('Add new department exits :)','Error');
@@ -408,7 +408,7 @@ class EmployeeController extends Controller
         
             DB::commit();
             Toastr::success('updated record successfully :)','Success');
-            return redirect()->route('form/departments/page');
+            return redirect()->back();
         } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('updated record fail :)','Error');
@@ -434,19 +434,19 @@ class EmployeeController extends Controller
     /** page designations */
     public function designationsIndex()
     {
-        return view('form.designations');
+        return view('employees.designations');
     }
 
     /** page time sheet */
     public function timeSheetIndex()
     {
-        return view('form.timesheet');
+        return view('employees.timesheet');
     }
 
     /** page overtime */
     public function overTimeIndex()
     {
-        return view('form.overtime');
+        return view('employees.overtime');
     }
 
 }

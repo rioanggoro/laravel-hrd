@@ -9,10 +9,11 @@ use App\Models\RolesPermissions;
 use Brian2694\Toastr\Facades\Toastr;
 class SettingController extends Controller
 {
-    // company/settings/page
+    /** company/settings/page */
     public function companySettings()
     {
-        return view('settings.companysettings');
+        $companySettings = CompanySettings::where('id',1)->first();
+        return view('settings.companysettings',compact('companySettings'));
     }
 
     /** save record company settings */
@@ -63,14 +64,14 @@ class SettingController extends Controller
         }
     }
     
-    // Roles & Permissions 
+    /** Roles & Permissions  */
     public function rolesPermissions()
     {
         $rolesPermissions = RolesPermissions::All();
         return view('settings.rolespermissions',compact('rolesPermissions'));
     }
 
-    // add role permissions
+    /** add role permissions */
     public function addRecord(Request $request)
     {
         $request->validate([
@@ -105,7 +106,7 @@ class SettingController extends Controller
         }
     }
 
-    // edit roles permissions
+    /** edit roles permissions */
     public function editRolesPermissions(Request $request)
     {
         DB::beginTransaction();
@@ -129,7 +130,8 @@ class SettingController extends Controller
             return redirect()->back();
         }
     }
-    // delete roles permissions
+
+    /** delete roles permissions */
     public function deleteRolesPermissions(Request $request)
     {
         try{
@@ -149,6 +151,7 @@ class SettingController extends Controller
     {
         return view('settings.localization');
     }
+
     /** salary settings */
     public function salarySettingsIndex()
     {
