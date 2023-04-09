@@ -93,12 +93,13 @@
                                                 @endif
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right jobtype_status">
-                                                <a class="dropdown-item" href="#" id="full_time"><i class="fa fa-dot-circle-o text-info"></i> Full Time</a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Part Time</a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Internship</a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-warning"></i> Temporary<a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-dark"></i> Remote</a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-dark"></i> Others</a>
+                                                <a hidden id="id_update">{{ $items->id }}</a>
+                                                <a class="dropdown-item full_time{{ $items->id }}" set="{{ $items->id }}"><i class="fa fa-dot-circle-o text-info"></i> Full Time</a>
+                                                <a class="dropdown-item part_time{{ $items->id }}" set="{{ $items->id }}><i class="fa fa-dot-circle-o text-success"></i> Part Time</a>
+                                                <a class="dropdown-item internship{{ $items->id }}" set="{{ $items->id }}><i class="fa fa-dot-circle-o text-danger"></i> Internship<a>
+                                                <a class="dropdown-item temporary{{ $items->id }}" set="{{ $items->id }}><i class="fa fa-dot-circle-o text-warning"></i> Temporary<a>
+                                                <a class="dropdown-item remote{{ $items->id }}" set="{{ $items->id }}><i class="fa fa-dot-circle-o text-dark"></i> Remote</a>
+                                                <a class="dropdown-item others{{ $items->id }}"set="{{ $items->id }}><i class="fa fa-dot-circle-o text-dark"></i> Others</a>
                                             </div>
                                         </div>
                                     </td>
@@ -474,21 +475,25 @@
             {
                 $('.jobtype_status').click(function()
                 {
-                    var full_time = $("#full_time").text();
-                    var full_time = $("#full_time").text();
+                    var full_time = $(".full_time1").text();
+                    var part_time = $(".part_time1").text();
+                    var id_update = $("#id_update").text();
                     
                     $.ajax({
                         url: '{{route("jobtypestatus/update")}}',
                         type: "POST",
                         data: {
                             full_time: full_time,
+                            part_time: part_time,
+                            id_update: id_update,
                             _token: "{{ csrf_token() }}"
                         },
                         success: function(data)
                         {
-                            console.log(full_time);
+                            console.log(data.job_type);
                         },
                     });
+                    location.reload();
                 });
             });
         </script>

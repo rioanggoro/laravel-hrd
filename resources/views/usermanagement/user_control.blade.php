@@ -393,6 +393,8 @@
             var _option = '<option selected value="' + name_role+ '">' + _this.find('.role_name').text() + '</option>'
             $( _option).appendTo("#e_role_name");
 
+            // $("#e_role_name").val(parseInt(_this.find('.role_name').text())).change();
+            
             var position = (_this.find(".position").text());
             var _option = '<option selected value="' +position+ '">' + _this.find('.position').text() + '</option>'
             $( _option).appendTo("#e_position");

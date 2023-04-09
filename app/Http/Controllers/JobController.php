@@ -145,13 +145,20 @@ class JobController extends Controller
     }
 
     /** update ajax status */
-    public function jobTypeStatusUpdate(Request $request) {
-        $full_time = $request->full_time;
-        $data = AddJob::all();
-        return Response::json([
-            'success' => true,
-            'data'   => $data,
-        ]); 
+    public function jobTypeStatusUpdate(Request $request)
+    {
+        if (!empty($request->part_time)) {
+            $job_type = $request->part_time;
+        } elseif (!empty($request->full_time)) {
+            $job_type = $request->full_time;
+        } else {
+            $job_type = null;
+        }
+        $update = [
+            'job_type' => $job_type,
+        ];
+        AddJob::where('id',$request->id_update)->update($update);
+        Toastr::success('Updated successfully :)','Success');
     }
     
     /** job applicants */

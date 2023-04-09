@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Company</label>
+                                        <label class="col-form-label">Line Manager</label>
                                         <select class="select" id="company" name="company">
                                             <option value="">-- Select --</option>
                                             <option value="Soeng Souy">Soeng Souy</option>
