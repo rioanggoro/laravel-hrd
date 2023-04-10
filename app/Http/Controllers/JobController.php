@@ -147,16 +147,25 @@ class JobController extends Controller
     /** update ajax status */
     public function jobTypeStatusUpdate(Request $request)
     {
+        return Response::json('data', $request);
         if (!empty($request->part_time)) {
             $job_type = $request->part_time;
-        } elseif (!empty($request->full_time)) {
-            $job_type = $request->full_time;
-        } else {
-            $job_type = null;
         }
+        // } elseif (!empty($request->full_time)) {
+        //     $job_type = $request->full_time;
+        // } elseif (!empty($request->internship)) {
+        //     $job_type = $request->internship;
+        // } elseif (!empty($request->temporary)) {
+        //     $job_type = $request->temporary;
+        // } elseif (!empty($request->remote)) {
+        //     $job_type = $request->remote;
+        // } elseif (!empty($request->others)) {
+        //     $job_type = $request->others;
+        // }
         $update = [
             'job_type' => $job_type,
         ];
+
         AddJob::where('id',$request->id_update)->update($update);
         Toastr::success('Updated successfully :)','Success');
     }
