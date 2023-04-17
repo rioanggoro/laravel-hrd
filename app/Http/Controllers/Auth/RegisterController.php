@@ -31,20 +31,26 @@ class RegisterController extends Controller
             'password'  => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required',
         ]);
-
-        $dt        = Carbon::now();
-        $todayDate = $dt->toDayDateTimeString();
-        
-        User::create([
-            'name'      => $request->name,
-            'avatar'    => $request->image,
-            'email'     => $request->email,
-            'join_date' => $todayDate,
-            'role_name' => $request->role_name,
-            'status'    => 'Active',
-            'password'  => Hash::make($request->password),
-        ]);
-        Toastr::success('Create new account successfully :)','Success');
-        return redirect('login');
+        try {
+            $dt        = Carbon::now();
+            $todayDate = $dt->toDayDateTimeString();
+            
+            User::create([
+                'name'      => $request->name,
+                'avatar'    => $request->image,
+                'email'     => $request->email,
+                'join_date' => $todayDate,
+                'role_name' => $request->role_name,
+                'status'    => 'Active',
+                'password'  => Hash::make($request->password),
+            ]);
+            Toastr::success('Create new account successfully :)','Success');
+            return redirect('login');
+        }catch(\Exception $e) {
+            \Log::info($e);
+            DB::rollback();
+            Toastr::error('Add new employee fail :)','Error');
+            return redirect()->back();
+        }
     }
 }

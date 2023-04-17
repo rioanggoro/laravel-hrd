@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Page Content -->
@@ -21,45 +22,18 @@
             </div>
 			<!-- /Page Header -->
 
-            <!-- Search Filter -->
-            <form action="{{ route('search/user/list') }}" method="POST">
-                @csrf
-                <div class="row filter-row">
-                    <div class="col-sm-6 col-md-3">  
-                        <div class="form-group form-focus">
-                            <input type="text" class="form-control floating" id="name" name="name">
-                            <label class="focus-label">User Name</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">  
-                        <div class="form-group form-focus">
-                            <input type="text" class="form-control floating" id="name" name="role_name">
-                            <label class="focus-label">Role Name</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3"> 
-                        <div class="form-group form-focus">
-                            <input type="text" class="form-control floating" id="name" name="status">
-                            <label class="focus-label">Status</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">  
-                        <button type="sumit" class="btn btn-success btn-block"> Search </button>  
-                    </div>
-                </div>
-            </form>     
-            <!-- /Search Filter -->
             {{-- message --}}
             {!! Toastr::message() !!}
+
+            <!-- /Page Header -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-striped custom-table datatable" style="width: 100%">
+                        <table class="table table-striped custom-table" id="userDataList">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>User ID</th>
-                                    <th hidden></th>
                                     <th>Email</th>
                                     <th>Position</th>
                                     <th>Phone</th>
@@ -70,89 +44,11 @@
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($result as $key=>$user )
-                                <tr>
-                                    <td>
-                                        <span hidden class="image">{{ $user->avatar}}</span>
-                                        <h2 class="table-avatar">
-                                            <a href="{{ url('employee/profile/'.$user->user_id) }}" class="avatar"><img src="{{ URL::to('/assets/images/'. $user->avatar) }}" alt="{{ $user->avatar }}"></a>
-                                            <a href="{{ url('employee/profile/'.$user->user_id) }}" class="name">{{ $user->name }}</span></a>
-                                        </h2>
-                                    </td>
-                                    <td hidden class="ids">{{ $user->id }}</td>
-                                    <td class="id">{{ $user->user_id }}</td>
-                                    <td class="email">{{ $user->email }}</td>
-                                    <td class="position">{{ $user->position }}</td>
-                                    <td class="phone_number">{{ $user->phone_number }}</td>
-                                    <td>{{ $user->join_date }}</td>
-                                    <td>
-                                        @if ($user->role_name=='Admin')
-                                            <span class="badge bg-inverse-danger role_name">{{ $user->role_name }}</span>
-                                            @elseif ($user->role_name=='Super Admin')
-                                            <span class="badge bg-inverse-warning role_name">{{ $user->role_name }}</span>
-                                            @elseif ($user->role_name=='Normal User')
-                                            <span class="badge bg-inverse-info role_name">{{ $user->role_name }}</span>
-                                            @elseif ($user->role_name=='Client')
-                                            <span class="badge bg-inverse-success role_name">{{ $user->role_name }}</span>
-                                            @elseif ($user->role_name=='Employee')
-                                            <span class="badge bg-inverse-dark role_name">{{ $user->role_name }}</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="dropdown action-label">
-                                            @if ($user->status=='Active')
-                                                <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa fa-dot-circle-o text-success"></i>
-                                                    <span class="statuss">{{ $user->status }}</span>
-                                                </a>
-                                                @elseif ($user->status=='Inactive')
-                                                <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa fa-dot-circle-o text-info"></i>
-                                                    <span class="statuss">{{ $user->status }}</span>
-                                                </a>
-                                                @elseif ($user->status=='Disable')
-                                                <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa fa-dot-circle-o text-danger"></i>
-                                                    <span class="statuss">{{ $user->status }}</span>
-                                                </a>
-                                                @elseif ($user->status=='')
-                                                <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa fa-dot-circle-o text-dark"></i>
-                                                    <span class="statuss">N/A</span>
-                                                </a>
-                                            @endif
-                                            
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fa fa-dot-circle-o text-success"></i> Active
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fa fa-dot-circle-o text-warning"></i> Inactive
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fa fa-dot-circle-o text-danger"></i> Disable
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="department">{{ $user->department }}</td>
-                                    <td class="text-right">
-                                        <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item userUpdate" data-toggle="modal" data-id="'.$user->id.'" data-target="#edit_user"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item userDelete" href="#" data-toggle="modal" ata-id="'.$user->id.'" data-target="#delete_user"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
         </div>
         <!-- /Page Content -->
         
@@ -378,6 +274,68 @@
     </div>
     <!-- /Page Wrapper -->
     @section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#userDataList').DataTable({
+                lengthMenu: [
+                    [10, 25, 50, 100,150],
+                    [10, 25, 50, 100,150]
+                ],
+                buttons: [
+                    'pageLength',
+                ],
+                "pageLength": 10,
+                order: [
+                    [5, 'desc']
+                ],
+                processing: true,
+                serverSide: true,
+                ordering: true,
+                searching: true,
+                ajax: "{{ route('get-users-data') }}",
+                columns: [{
+                        data: 'name',
+                        name: 'name',
+                        orderable: false
+                    },
+                    {
+                        data: 'user_id',
+                        name: 'user_id'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'position',
+                        name: 'position'
+                    },
+                    {
+                        data: 'phone_number',
+                        name: 'phone_number'
+                    },
+                    {
+                        data: 'join_date',
+                        name: 'join_date',
+                    },
+                    {
+                        data: 'role_name',
+                        name: 'role_name',
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                    },
+                    {
+                        data: 'department',
+                        name: 'department',
+                        orderable: false
+                    },
+                ]
+            });
+
+        });
+    </script>
     {{-- update js --}}
     <script>
         $(document).on('click','.userUpdate',function()

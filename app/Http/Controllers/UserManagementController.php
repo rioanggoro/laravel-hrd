@@ -22,7 +22,7 @@ class UserManagementController extends Controller
     /** index page */
     public function index()
     {
-        if (Auth::user()->role_name=='Admin')
+        if (Session::get('role_name') == 'Admin')
         {
             $result      = DB::table('users')->get();
             $role_name   = DB::table('role_type_users')->get();
@@ -30,84 +30,84 @@ class UserManagementController extends Controller
             $department  = DB::table('departments')->get();
             $status_user = DB::table('user_types')->get();
             return view('usermanagement.user_control',compact('result','role_name','position','department','status_user'));
-        }
-        else
-        {
+        } else {
             return redirect()->route('home');
         }
         
     }
 
-    /** search user */
-    public function searchUser(Request $request)
+    /** get list data and search */
+    public function getUsersData(Request $request)
     {
-        if (Auth::user()->role_name=='Admin')
-        {
-            $users      = DB::table('users')->get();
-            $result     = DB::table('users')->get();
-            $role_name  = DB::table('role_type_users')->get();
-            $position   = DB::table('position_types')->get();
-            $department = DB::table('departments')->get();
-            $status_user = DB::table('user_types')->get();
+        $draw            = $request->get('draw');
+        $start           = $request->get("start");
+        $rowperpage      = $request->get("length"); // total number of rows per page
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr  = $request->get('columns');
+        $order_arr       = $request->get('order');
+        $search_arr      = $request->get('search');
 
-            // search by name
-            if($request->name)
-            {
-                $result = User::where('name','LIKE','%'.$request->name.'%')->get();
-            }
+        $columnIndex     = $columnIndex_arr[0]['column']; // Column index
+        $columnName      = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue     = $search_arr['value']; // Search value
 
-            // search by role name
-            if($request->role_name)
-            {
-                $result = User::where('role_name','LIKE','%'.$request->role_name.'%')->get();
-            }
+        $users =  DB::table('users');
+        $totalRecords = $users->count();
 
-            // search by status
-            if($request->status)
-            {
-                $result = User::where('status','LIKE','%'.$request->status.'%')->get();
-            }
+        $totalRecordswithFilter = $users->where(function ($query) use ($searchValue) {
+            $query->where('name', 'like', '%' . $searchValue . '%');
+            $query->orWhere('user_id', 'like', '%' . $searchValue . '%');
+            $query->orWhere('email', 'like', '%' . $searchValue . '%');
+            $query->orWhere('position', 'like', '%' . $searchValue . '%');
+            $query->orWhere('phone_number', 'like', '%' . $searchValue . '%');
+            $query->orWhere('join_date', 'like', '%' . $searchValue . '%');
+            $query->orWhere('role_name', 'like', '%' . $searchValue . '%');
+            $query->orWhere('status', 'like', '%' . $searchValue . '%');
+            $query->orWhere('department', 'like', '%' . $searchValue . '%');
+        })->count();
 
-            // search by name and role name
-            if($request->name && $request->role_name)
-            {
-                $result = User::where('name','LIKE','%'.$request->name.'%')
-                                ->where('role_name','LIKE','%'.$request->role_name.'%')
-                                ->get();
-            }
-
-            // search by role name and status
-            if($request->role_name && $request->status)
-            {
-                $result = User::where('role_name','LIKE','%'.$request->role_name.'%')
-                                ->where('status','LIKE','%'.$request->status.'%')
-                                ->get();
-            }
-
-            // search by name and status
-            if($request->name && $request->status)
-            {
-                $result = User::where('name','LIKE','%'.$request->name.'%')
-                                ->where('status','LIKE','%'.$request->status.'%')
-                                ->get();
-            }
-
-            // search by name and role name and status
-            if($request->name && $request->role_name && $request->status)
-            {
-                $result = User::where('name','LIKE','%'.$request->name.'%')
-                                ->where('role_name','LIKE','%'.$request->role_name.'%')
-                                ->where('status','LIKE','%'.$request->status.'%')
-                                ->get();
-            }
-           
-            return view('usermanagement.user_control',compact('users','role_name','position','department','status_user','result'));
+        if ($columnName == 'user_id') {
+            $columnName = 'user_id';
         }
-        else
-        {
-            return redirect()->route('home');
+        $records = $users->orderBy($columnName, $columnSortOrder)
+            ->where(function ($query) use ($searchValue) {
+                $query->where('name', 'like', '%' . $searchValue . '%');
+                $query->orWhere('user_id', 'like', '%' . $searchValue . '%');
+                $query->orWhere('email', 'like', '%' . $searchValue . '%');
+                $query->orWhere('position', 'like', '%' . $searchValue . '%');
+                $query->orWhere('phone_number', 'like', '%' . $searchValue . '%');
+                $query->orWhere('join_date', 'like', '%' . $searchValue . '%');
+                $query->orWhere('role_name', 'like', '%' . $searchValue . '%');
+                $query->orWhere('status', 'like', '%' . $searchValue . '%');
+                $query->orWhere('department', 'like', '%' . $searchValue . '%');
+            })
+            ->skip($start)
+            ->take($rowperpage)
+            ->get();
+        $data_arr = [];
+        foreach ($records as $key => $record) {
+            $record->name = '<h2 class="table-avatar"><a href="'.url('employee/profile/' . $record->user_id).'">'.'<img class="avatar" src="'.url('/assets/images/'.$record->avatar).'">' .$record->name.'</a></h2>';
+               
+            $data_arr[] = [
+                "name"         => $record->name,
+                "user_id"      => $record->user_id,
+                "email"        => $record->email,
+                "position"     => $record->position,
+                "phone_number" => $record->phone_number,
+                "join_date"    => $record->join_date,
+                "role_name"    => $record->role_name,
+                "status"       => $record->status,
+                "department"   => $record->department,
+            ];
         }
-    
+        $response = [
+            "draw"                 => intval($draw),
+            "iTotalRecords"        => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData"               => $data_arr
+        ];
+        return response()->json($response);
     }
 
     /** use activity log */

@@ -115,16 +115,15 @@ Route::controller(UserManagementController::class)->group(function () {
     Route::post('profile/information/save', 'profileInformation')->name('profile/information/save');
     Route::get('userManagement', 'index')->middleware('auth')->name('userManagement');
     Route::post('user/add/save', 'addNewUserSave')->name('user/add/save');
-    Route::post('search/user/list', 'searchUser')->name('search/user/list');
     Route::post('update', 'update')->name('update');
     Route::post('user/delete', 'delete')->middleware('auth')->name('user/delete');
     Route::get('activity/log', 'activityLog')->middleware('auth')->name('activity/log');
     Route::get('activity/login/logout', 'activityLogInLogOut')->middleware('auth')->name('activity/login/logout');
-    Route::post('search/user/list', 'searchUser')->name('search/user/list');
     Route::get('change/password', 'changePasswordView')->middleware('auth')->name('change/password');
     Route::post('change/password/db', 'changePasswordDB')->name('change/password/db');
     
     Route::post('user/profile/emergency/contact/save', 'emergencyContactSaveOrUpdate')->name('user/profile/emergency/contact/save'); /** save or update emergency contact */
+    Route::get('get-users-data', 'getUsersData')->name('get-users-data'); /** get all data users */
     
 });
 
