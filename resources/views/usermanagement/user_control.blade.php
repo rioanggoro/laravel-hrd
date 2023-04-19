@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-striped custom-table" id="userDataList">
+                        <table class="table table-striped custom-table" id="userDataList" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -41,17 +41,15 @@
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th>Departement</th>
-                                    <th class="text-right">Action</th>
+                                    {{-- <th class="text-right">Action</th> --}}
                                 </tr>
                             </thead>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /Page Content -->
-        
 
         <!-- Add User Modal -->
         <div id="add_user" class="modal custom-modal fade" role="dialog">

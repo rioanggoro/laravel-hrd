@@ -88,7 +88,21 @@ class UserManagementController extends Controller
         $data_arr = [];
         foreach ($records as $key => $record) {
             $record->name = '<h2 class="table-avatar"><a href="'.url('employee/profile/' . $record->user_id).'">'.'<img class="avatar" src="'.url('/assets/images/'.$record->avatar).'">' .$record->name.'</a></h2>';
-               
+            
+            if ($record->role_name == 'Admin') { /** color role name */
+                $role_name = '<span class="badge bg-inverse-danger role_name">'.$record->role_name.'</span>';
+            } elseif ($record->role_name == 'Super Admin') {
+                $role_name = '<span class="badge bg-inverse-warning role_name">'.$record->role_name.'</span>';
+            } elseif ($record->role_name == 'Normal User') {
+                $role_name = '<span class="badge bg-inverse-info role_name">'.$record->role_name.'</span>';
+            } elseif ($record->role_name == 'Client') {
+                $role_name = '<span class="badge bg-inverse-success role_name">'.$record->role_name.'</span>'; 
+            } elseif ($record->role_name == 'Employee') {
+                $role_name = '<span class="badge bg-inverse-dark role_name">'.$record->role_name.'</span>'; 
+            } else {
+                $role_name = 'NULL'; /** null role name */
+            }
+
             $data_arr[] = [
                 "name"         => $record->name,
                 "user_id"      => $record->user_id,
@@ -96,7 +110,7 @@ class UserManagementController extends Controller
                 "position"     => $record->position,
                 "phone_number" => $record->phone_number,
                 "join_date"    => $record->join_date,
-                "role_name"    => $record->role_name,
+                "role_name"    => $role_name,
                 "status"       => $record->status,
                 "department"   => $record->department,
             ];
