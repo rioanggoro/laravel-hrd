@@ -32,6 +32,7 @@
                         <table class="table table-striped custom-table" id="userDataList" style="width: 100%">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Name</th>
                                     <th>User ID</th>
                                     <th>Email</th>
@@ -41,7 +42,7 @@
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th>Departement</th>
-                                    {{-- <th class="text-right">Action</th> --}}
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -253,7 +254,7 @@
                             <form action="{{ route('user/delete') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" class="e_id" value="">
-                                <input type="hidden" name="avatar" class="e_avatar" value="">
+                                <input type="hidden" name="avatar" id="e_avatar" value="">
                                 <div class="row">
                                     <div class="col-6">
                                         <button type="submit" class="btn btn-primary continue-btn submit-btn">Delete</button>
@@ -272,9 +273,12 @@
     </div>
     <!-- /Page Wrapper -->
     @section('script')
+
     <script type="text/javascript">
         $(document).ready(function() {
+            
             $('#userDataList').DataTable({
+                
                 lengthMenu: [
                     [10, 25, 50, 100,150],
                     [10, 25, 50, 100,150]
@@ -291,10 +295,14 @@
                 ordering: true,
                 searching: true,
                 ajax: "{{ route('get-users-data') }}",
+                
                 columns: [{
+                        data: 'no',
+                        name: 'no',
+                    },
+                    {
                         data: 'name',
-                        name: 'name',
-                        orderable: false
+                        name: 'name'
                     },
                     {
                         data: 'user_id',
@@ -327,53 +335,44 @@
                     {
                         data: 'department',
                         name: 'department',
-                        orderable: false
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
                     },
                 ]
             });
 
         });
     </script>
+
     {{-- update js --}}
     <script>
         $(document).on('click','.userUpdate',function()
         {
             var _this = $(this).parents('tr');
-            $('#e_id').val(_this.find('.id').text());
+            $('#e_id').val(_this.find('.user_id').text());
             $('#e_name').val(_this.find('.name').text());
             $('#e_email').val(_this.find('.email').text());
+            $('#e_role_name').val(_this.find('.role_name').text()).change();
+            $('#e_position').val(_this.find('.position').text()).change();
             $('#e_phone_number').val(_this.find('.phone_number').text());
-            $('#e_image').val(_this.find('.image').text());
-
-            var name_role = (_this.find(".role_name").text());
-            var _option = '<option selected value="' + name_role+ '">' + _this.find('.role_name').text() + '</option>'
-            $( _option).appendTo("#e_role_name");
-
-            // $("#e_role_name").val(parseInt(_this.find('.role_name').text())).change();
-            
-            var position = (_this.find(".position").text());
-            var _option = '<option selected value="' +position+ '">' + _this.find('.position').text() + '</option>'
-            $( _option).appendTo("#e_position");
-
-            var department = (_this.find(".department").text());
-            var _option = '<option selected value="' +department+ '">' + _this.find('.department').text() + '</option>'
-            $( _option).appendTo("#e_department");
-
-            var statuss = (_this.find(".statuss").text());
-            var _option = '<option selected value="' +statuss+ '">' + _this.find('.statuss').text() + '</option>'
-            $( _option).appendTo("#e_status");
-            
+            $('#e_department').val(_this.find('.department').text());
+            $('#e_status').val(_this.find('.status_s').text());
+            $('#e_image').val(_this.find('.avatar').data('avatar'));
         });
     </script>
+
     {{-- delete js --}}
     <script>
         $(document).on('click','.userDelete',function()
         {
             var _this = $(this).parents('tr');
-            $('.e_id').val(_this.find('.ids').text());
-            $('.e_avatar').val(_this.find('.image').text());
+            $('.e_id').val(_this.find('.id').text());
+            $('#e_avatar').val(_this.find('.avatar').data('avatar'));
         });
     </script>
+
     @endsection
 
 @endsection

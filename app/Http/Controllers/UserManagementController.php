@@ -41,7 +41,7 @@ class UserManagementController extends Controller
     {
         $draw            = $request->get('draw');
         $start           = $request->get("start");
-        $rowperpage      = $request->get("length"); // total number of rows per page
+        $rowPerPage      = $request->get("length"); // total number of rows per page
         $columnIndex_arr = $request->get('order');
         $columnName_arr  = $request->get('columns');
         $order_arr       = $request->get('order');
@@ -55,7 +55,7 @@ class UserManagementController extends Controller
         $users =  DB::table('users');
         $totalRecords = $users->count();
 
-        $totalRecordswithFilter = $users->where(function ($query) use ($searchValue) {
+        $totalRecordsWithFilter = $users->where(function ($query) use ($searchValue) {
             $query->where('name', 'like', '%' . $searchValue . '%');
             $query->orWhere('user_id', 'like', '%' . $searchValue . '%');
             $query->orWhere('email', 'like', '%' . $searchValue . '%');
@@ -83,12 +83,11 @@ class UserManagementController extends Controller
                 $query->orWhere('department', 'like', '%' . $searchValue . '%');
             })
             ->skip($start)
-            ->take($rowperpage)
+            ->take($rowPerPage)
             ->get();
         $data_arr = [];
         foreach ($records as $key => $record) {
-            $record->name = '<h2 class="table-avatar"><a href="'.url('employee/profile/' . $record->user_id).'">'.'<img class="avatar" src="'.url('/assets/images/'.$record->avatar).'">' .$record->name.'</a></h2>';
-            
+            $record->name = '<h2 class="table-avatar"><a href="'.url('employee/profile/' . $record->user_id).'" class="name">'.'<img class="avatar" data-avatar='.$record->avatar.' src="'.url('/assets/images/'.$record->avatar).'">' .$record->name.'</a></h2>';
             if ($record->role_name == 'Admin') { /** color role name */
                 $role_name = '<span class="badge bg-inverse-danger role_name">'.$record->role_name.'</span>';
             } elseif ($record->role_name == 'Super Admin') {
@@ -103,22 +102,41 @@ class UserManagementController extends Controller
                 $role_name = 'NULL'; /** null role name */
             }
 
-            $data_arr[] = [
+            $data_arr [] = [
+                "no"           => '<span class="id">'.$record->id.'</span>',
                 "name"         => $record->name,
-                "user_id"      => $record->user_id,
-                "email"        => $record->email,
-                "position"     => $record->position,
-                "phone_number" => $record->phone_number,
+                "user_id"      => '<span class="user_id">'.$record->user_id.'</span>',
+                "email"        => '<span class="email">'.$record->email.'</span>',
+                "position"     => '<span class="position">'.$record->position.'</span>',
+                "phone_number" => '<span class="phone_number">'.$record->phone_number.'</span>',
                 "join_date"    => $record->join_date,
                 "role_name"    => $role_name,
-                "status"       => $record->status,
-                "department"   => $record->department,
+                "status"       => '<span class="status_s">'.$record->status.'</span>',
+                "department"   => '<span class="department">'.$record->department.'</span>',
+                "action"       => 
+                '
+                <td>
+                    <div class="dropdown dropdown-action">
+                        <a class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item userUpdate" data-toggle="modal" data-id="'.$record->id.'" data-target="#edit_user">
+                                <i class="fa fa-pencil m-r-5"></i> Edit
+                            </a>
+                            <a class="dropdown-item userDelete" data-toggle="modal" data-id="'.$record->id.'" data-target="#delete_user">
+                                <i class="fa fa-trash-o m-r-5"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </td>
+                ',
             ];
         }
         $response = [
             "draw"                 => intval($draw),
             "iTotalRecords"        => $totalRecords,
-            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "iTotalDisplayRecords" => $totalRecordsWithFilter,
             "aaData"               => $data_arr
         ];
         return response()->json($response);
@@ -365,7 +383,7 @@ class UserManagementController extends Controller
                 UserEmergencyContact::destroy($request->id);
             } else {
                 User::destroy($request->id);
-                unlink('assets/images/'.$request->avatar);
+                // unlink('assets/images/'.$request->avatar);
                 PersonalInformation::destroy($request->id);
                 UserEmergencyContact::destroy($request->id);
             }
