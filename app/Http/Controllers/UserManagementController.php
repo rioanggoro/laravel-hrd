@@ -103,7 +103,7 @@ class UserManagementController extends Controller
             }
 
             $data_arr [] = [
-                "no"           => '<span class="id">'.$record->id.'</span>',
+                "no"           => '<span class="id" data-id = '.$record->id.'>'.$start + ($key + 1).'</span>',
                 "name"         => $record->name,
                 "user_id"      => '<span class="user_id">'.$record->user_id.'</span>',
                 "email"        => '<span class="email">'.$record->email.'</span>',
@@ -383,7 +383,7 @@ class UserManagementController extends Controller
                 UserEmergencyContact::destroy($request->id);
             } else {
                 User::destroy($request->id);
-                // unlink('assets/images/'.$request->avatar);
+                unlink('assets/images/'.$request->avatar);
                 PersonalInformation::destroy($request->id);
                 UserEmergencyContact::destroy($request->id);
             }
