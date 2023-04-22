@@ -102,6 +102,49 @@ class UserManagementController extends Controller
                 $role_name = 'NULL'; /** null role name */
             }
 
+            /** status */
+            $full_status = '
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item"><i class="fa fa-dot-circle-o text-success"></i> Active </a>
+                    <a class="dropdown-item"><i class="fa fa-dot-circle-o text-warning"></i> Inactive </a>
+                    <a class="dropdown-item"><i class="fa fa-dot-circle-o text-danger"></i> Disable </a>
+                </div>
+            ';
+
+            if ($record->status == 'Active') {
+                $status = '
+                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-dot-circle-o text-success"></i>
+                        <span class="status_s">'.$record->status.'</span>
+                    </a>
+                    '.$full_status.'
+                ';
+            } elseif ($record->status == 'Inactive') {
+                $status = '
+                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-dot-circle-o text-info"></i>
+                        <span class="status_s">'.$record->status.'</span>
+                    </a>
+                    '.$full_status.'
+                ';
+            } elseif ($record->status == 'Disable') {
+                $status = '
+                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-dot-circle-o text-danger"></i>
+                        <span class="status_s">'.$record->status.'</span>
+                    </a>
+                    '.$full_status.'
+                ';
+            } else {
+                $status = '
+                    <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-dot-circle-o text-dark"></i>
+                        <span class="statuss">'.$record->status.'</span>
+                    </a>
+                    '.$full_status.'
+                ';
+            }
+
             $data_arr [] = [
                 "no"           => '<span class="id" data-id = '.$record->id.'>'.$start + ($key + 1).'</span>',
                 "name"         => $record->name,
@@ -111,7 +154,7 @@ class UserManagementController extends Controller
                 "phone_number" => '<span class="phone_number">'.$record->phone_number.'</span>',
                 "join_date"    => $record->join_date,
                 "role_name"    => $role_name,
-                "status"       => '<span class="status_s">'.$record->status.'</span>',
+                "status"       => $status,
                 "department"   => '<span class="department">'.$record->department.'</span>',
                 "action"       => 
                 '

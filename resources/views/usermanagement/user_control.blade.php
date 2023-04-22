@@ -358,7 +358,7 @@
             $('#e_position').val(_this.find('.position').text()).change();
             $('#e_phone_number').val(_this.find('.phone_number').text());
             $('#e_department').val(_this.find('.department').text());
-            $('#e_status').val(_this.find('.status_s').text());
+            $('#e_status').val(_this.find('.status_s').text()).change();
             $('#e_image').val(_this.find('.avatar').data('avatar'));
         });
     </script>
