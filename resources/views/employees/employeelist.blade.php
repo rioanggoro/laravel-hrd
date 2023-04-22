@@ -248,13 +248,12 @@
                 var group = "input:checkbox[class='" + $box.attr("class") + "']";
                 $(group).prop("checked", false);
                 $box.prop("checked", true);
-            }
-            else
-            {
+            } else {
                 $box.prop("checked", false);
             }
         });
     </script>
+    
     <script>
         // select auto id and email
         $('#name').on('change',function()

@@ -247,35 +247,6 @@
             $('#email').val($(this).find(':selected').data('email'));
         });
     </script>
-    {{-- update js --}}
-    <script>
-        $(document).on('click','.userUpdate',function()
-        {
-            var _this = $(this).parents('tr');
-            $('#e_id').val(_this.find('.id').text());
-            $('#e_name').val(_this.find('.name').text());
-            $('#e_email').val(_this.find('.email').text());
-            $('#e_phone_number').val(_this.find('.phone_number').text());
-            $('#e_image').val(_this.find('.image').text());
-
-            var name_role = (_this.find(".role_name").text());
-            var _option = '<option selected value="' + name_role+ '">' + _this.find('.role_name').text() + '</option>'
-            $( _option).appendTo("#e_role_name");
-
-            var position = (_this.find(".position").text());
-            var _option = '<option selected value="' +position+ '">' + _this.find('.position').text() + '</option>'
-            $( _option).appendTo("#e_position");
-
-            var department = (_this.find(".department").text());
-            var _option = '<option selected value="' +department+ '">' + _this.find('.department').text() + '</option>'
-            $( _option).appendTo("#e_department");
-
-            var statuss = (_this.find(".statuss").text());
-            var _option = '<option selected value="' +statuss+ '">' + _this.find('.statuss').text() + '</option>'
-            $( _option).appendTo("#e_status");
-            
-        });
-    </script>
     @endsection
 
 @endsection

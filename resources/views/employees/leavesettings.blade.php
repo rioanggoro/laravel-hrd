@@ -607,7 +607,6 @@
             </div>
         </div>
         <!-- /Delete Custom Policy Modal -->
-       
     </div>
     <!-- /Page Wrapper -->
     @section('script')

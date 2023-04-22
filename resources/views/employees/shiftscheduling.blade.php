@@ -963,7 +963,6 @@
             </div>
         </div>
         <!-- /Edit Schedule Modal -->
-
     </div>
     <!-- Page Wrapper -->
 @endsection

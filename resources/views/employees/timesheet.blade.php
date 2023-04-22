@@ -490,7 +490,6 @@
             </div>
         </div>
         <!-- Delete Today Work Modal -->
-        
     </div>
     <!-- /Page Wrapper -->
 
