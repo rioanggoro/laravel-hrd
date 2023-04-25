@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <!-- /Page Header -->
-                    <form action="{{ route('company/settings/save') }}" method="POST">
+                    {{-- <form action="{{ route('company/settings/save') }}" method="POST">
                         @csrf
                         <input type="hidden" class="form-control" name="id" value="1">
                         <div class="row">
@@ -114,7 +114,7 @@
                         <div class="submit-section">
                             <button type="submit" class="btn btn-primary submit-btn">Save</button>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         </div>

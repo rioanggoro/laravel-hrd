@@ -157,4 +157,10 @@ class SettingController extends Controller
     {
         return view('settings.salary-settings');
     }
+
+    /** email Settings */
+    public function emailSettingsIndex()
+    {
+        return view('settings.email-settings');
+    }
 }
