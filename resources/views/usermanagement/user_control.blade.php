@@ -330,7 +330,9 @@
                 serverSide: true,
                 ordering: true,
                 searching: true,
-                ajax: "{{ route('get-users-data') }}",
+                ajax: {
+                    url:"{{ route('get-users-data') }}",
+                },
                 
                 columns: [{
                         data: 'no',
