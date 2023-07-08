@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="col-sm-6 col-md-3">  
-                    <button type="sumit" class="btn btn-success btn-block"> Search </button>  
+                    <button type="sumit" class="btn btn-success btn-block btn_search"> Search </button>  
                 </div>
             </div>
 
@@ -313,7 +313,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             
-            $('#userDataList').DataTable({
+            table = $('#userDataList').DataTable({
                 
                 lengthMenu: [
                     [10, 25, 50, 100,150],
@@ -332,6 +332,15 @@
                 searching: true,
                 ajax: {
                     url:"{{ route('get-users-data') }}",
+                    data:function(data) {
+                        // read valus for search
+                        var user_name   = $('#user_name').val();
+                        var type_role   = $('#type_role').val();
+                        var type_status = $('#type_status').val();
+                        data.user_name   = user_name;
+                        data.type_role   = type_role;
+                        data.type_status = type_status;
+                    }
                 },
                 
                 columns: [{
@@ -380,7 +389,9 @@
                     },
                 ]
             });
-
+            $('.btn_search').on('click',function() {
+                table.draw();
+            });
         });
     </script>
 
