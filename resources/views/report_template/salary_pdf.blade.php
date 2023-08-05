@@ -2,29 +2,10 @@
 @extends('layouts.exportmaster')
 @section('content')
     <!-- Page Wrapper -->
-    <div class="">
     <div class="page-wrapper">
         <!-- Page Content -->
         <div class="content container-fluid" id="app">
             <!-- Page Header -->
-            <div class="page-header">
-                <div class="row align-items-center">
-                    <div class="col" style="margin-left: -222px;">
-                        <h3 class="page-title">Payslip</h3>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('form/salary/page') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Payslip</li>
-                        </ul>
-                    </div>
-                    <div class="col-auto float-right ml-auto">
-                        <div class="btn-group btn-group-sm">
-                            <button class="btn btn-white" style="color: green"><i class="fa fa-file-excel-o"></i> Excel</button>
-                            <button class="btn btn-white" style="color: red"><i class="fa fa-file-pdf-o"></i> <a href="{{ url("extra/report/pdf/?user_id=$users->user_id") }}">PDF</a></button>
-                            <button class="btn btn-white" style="color: black"><i class="fa fa-print fa-lg"></i><a href="" @click.prevent="printme" target="_blank"> Print</a></button>
-                        </div>
-                    </div>
-                </div>
-           
             <div class="row" style="margin-left: -240px;">
                 <div class="col-md-12">
                     <div class="card">
@@ -132,8 +113,5 @@
                 </div>
             </div>
         </div>
-        <!-- /Page Content -->
-    </div>
-    <!-- /Page Wrapper -->
     </div>
 @endsection

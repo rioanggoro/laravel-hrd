@@ -237,6 +237,7 @@ Route::controller(PayrollController::class)->group(function () {
     Route::post('form/salary/delete', 'deleteRecord')->middleware('auth')->name('form/salary/delete');
     Route::get('form/salary/view/{user_id}', 'salaryView')->middleware('auth');
     Route::get('form/payroll/items', 'payrollItems')->middleware('auth')->name('form/payroll/items');    
+    Route::get('extra/report/pdf', 'reportPDF')->middleware('auth');    
 });
 
 // ---------------------------- reports  ----------------------------//
