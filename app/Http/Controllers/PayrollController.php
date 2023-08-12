@@ -151,15 +151,13 @@ class PayrollController extends Controller
     public function reportPDF(Request $request)
     {
         $user_id = $request->user_id;
-        $salaryPDF = DB::table('users')
+        $users = DB::table('users')
             ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
             ->join('profile_information', 'users.user_id', 'profile_information.user_id')
             ->select('users.*', 'staff_salaries.*','profile_information.*')
             ->where('staff_salaries.user_id',$user_id)->first();
 
-            $pdf = PDF::loadView('report_template.salary_pdf', $salaryPDF);
-            return $pdf->download('salary.pdf');
-
-        // return view('report_template.salary_pdf',compact('users'));
+            $pdf = PDF::loadView('report_template.salary_pdf',compact('users'))->setPaper('a4', 'landscape');
+            return $pdf->download('ReportDetailSalary'.'.pdf');
     }
 }
