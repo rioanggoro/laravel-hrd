@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-white" style="color: green"><i class="fa fa-file-excel-o"></i> Excel</button>
+                            <button class="btn btn-white" style="color: green"><i class="fa fa-file-excel-o"></i><a href="{{ url("extra/report/excel/?user_id=$users->user_id") }}"> Excel</a></button>
                             <button class="btn btn-white" style="color: red"><i class="fa fa-file-pdf-o"></i> <a href="{{ url("extra/report/pdf/?user_id=$users->user_id") }}">PDF</a></button>
                             <button class="btn btn-white" style="color: black"><i class="fa fa-print fa-lg"></i><a href="" @click.prevent="printme" target="_blank"> Print</a></button>
                         </div>

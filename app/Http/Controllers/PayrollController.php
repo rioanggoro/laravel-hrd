@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use PDF;
+use App\Exports\SalaryExcel;
+use Maatwebsite\Excel\Excel;
 use App\Models\StaffSalary;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -159,5 +161,19 @@ class PayrollController extends Controller
 
             $pdf = PDF::loadView('report_template.salary_pdf',compact('users'))->setPaper('a4', 'landscape');
             return $pdf->download('ReportDetailSalary'.'.pdf');
+    }
+
+    /** export Excel */
+    public function reportExcel(Request $request)
+    {
+        $user_id = $request->user_id;
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
+            ->join('profile_information', 'users.user_id', 'profile_information.user_id')
+            ->select('users.*', 'staff_salaries.*','profile_information.*')
+            ->where('staff_salaries.user_id',$user_id)->first();
+            
+            $test = 'Excel';
+            return Excel::download(new SalaryExcel($test),'ReportDetailSalary'.'.xlsx');
     }
 }
