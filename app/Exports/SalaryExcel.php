@@ -5,20 +5,17 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-
-use DB;
-use Carbon\Carbon;
-use Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SalaryExcel implements FromView
 {
-    public $text;
-    function __construct($text) {
-        $this->text = $text;
-    }
+    // public $users;
+    // function __construct($users) {
+    //     $this->users = $users;
+    // }
     public function view():View
     {
-        $text =  $this->text;
-        return view('report_template.salary_excel', compact('result'));
+        // $user s =  $this->users;
+        return view('report_template.salary_excel',);
     }
 }
