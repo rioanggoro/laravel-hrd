@@ -173,6 +173,6 @@ class PayrollController extends Controller
             ->select('users.*', 'staff_salaries.*','profile_information.*')
             ->where('staff_salaries.user_id',$user_id)->get();
             
-            return Excel::download(new SalaryExcel,'ReportDetailSalary'.'.xlsx');
+            return Excel::download(new SalaryExcel($user_id),'ReportDetailSalary'.'.xlsx');
     }
 }

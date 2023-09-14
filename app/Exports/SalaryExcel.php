@@ -9,13 +9,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SalaryExcel implements FromView
 {
-    // public $users;
-    // function __construct($users) {
-    //     $this->users = $users;
-    // }
+    public $user_id;
+    function __construct($user_id) {
+        $this->user_id = $user_id;
+    }
     public function view():View
     {
-        // $user s =  $this->users;
-        return view('report_template.salary_excel',);
+        $user_id =  $this->user_id;
+        return view('report_template.salary_excel',compact('user_id'));
     }
 }
