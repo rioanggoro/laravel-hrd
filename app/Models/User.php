@@ -59,7 +59,7 @@ class User extends Authenticatable
             $getUser = self::orderBy('user_id', 'desc')->first();
 
             if ($getUser) {
-                $latestID = intval(substr($getUser->user_id, 3));
+                $latestID = intval(substr($getUser->user_id, 4));
                 $nextID = $latestID + 1;
             } else {
                 $nextID = 1;
