@@ -75,6 +75,7 @@
                                     <th>Position</th>
                                     <th>Phone</th>
                                     <th>Join Date</th>
+                                    <th>Last Login</th>
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th>Departement</th>
@@ -264,7 +265,9 @@
                                     <label>Photo</label>
                                     <input class="form-control" type="file" id="image" name="images">
                                     <input type="hidden" name="hidden_image" id="e_image" value="">
+                                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                                 </div>
+
                             </div>
                             <br>
                             <div class="submit-section">
@@ -370,6 +373,10 @@
                     {
                         data: 'join_date',
                         name: 'join_date',
+                    },
+                    {
+                        data: 'last_login',
+                        name: 'last_login',
                     },
                     {
                         data: 'role_name',

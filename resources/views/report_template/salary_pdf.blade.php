@@ -2,7 +2,7 @@
 <html>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <head>
-    <title>Eform Rrport Manual</title>
+    <title>Employee Salary Report</title>
     <style>
         @page {
             footer: page-footer;
@@ -258,7 +258,6 @@
         }
 
     </style>
-
 </head>
 
 <body style="font-size: 10px;">
@@ -271,46 +270,44 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-6 m-b-20">
-                           dddd
+                           Logo
                             <ul class="list-unstyled mb-0">
                                 <li>{{ $users->name }}</li>
                                 <li>{{ $users->address }}</li>
                                 <li>{{ $users->country }}</li>
                             </ul>
                         </div>
-                        <div class="col-sm-6 m-b-20">
+                        {{-- <div class="col-sm-6 m-b-20">
                             <div class="invoice-details">
                                 <h3 class="text-uppercase">Payslip #49029</h3>
                                 <ul class="list-unstyled">
-                                    <li>Salary Month: <span>{{ \Carbon\Carbon::now()->format('M') }}  , {{ \Carbon\Carbon::now()->year }}  </span></li>
+                                    <li>Salary Month: <span>{{ \Carbon\Carbon::now()->format('M') }}  , {{ \Carbon\Carbon::now()->year }} </span></li>
                                 </ul>
+                                <br>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </td>
             </tr>
         </table>
     </div>
     <div class="container" style="padding-top: 8px; ">
-        <table class="table-border" style="border: 1px solid #45B6FE;">
-            <tr style="background-color: #45B6FE; font-weight: bold;">
-                <td style="width:12%;text-align: left;">Division</td>
-                <td style="width:14%;text-align: left;">Department</td>
-                <td style="width:12%;text-align: left;">Manual Code</td>
-                <td style="width:34%;text-align: left;">Manual Title</td>
-                <td style="width:13%;text-align: left;">Approved Date</td>
-                <td style="width:10%;text-align: left;">Approved By</td>
-                <td style="width:6%;text-align: left;">Status</td>
+        <table class="table-border">
+            <tr style="font-weight: bold;">
+                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
+                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
+                <td>Manual Title</td>
             </tr>
-                <tr>
-                    <td style="text-align: left;">ddd</td>
-                    <td style="text-align: left;">ddd</td>
-                    <td style="text-align: left;">ddd</td>
-                    <td style="text-align: left;">ddd</td>
-                    <td style="text-align: left;">ddd</td>
-                    <td style="text-align: left;">ddd</td>
-                    <td style="text-align: left;">ddd</td>
-                </tr>
+            <tr style="font-weight: bold;">
+                <td><strong style="float: left;">House Rent Allowance (H.R.A.)</strong> <span style="float: right;">$4</span></td>
+                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
+                <td>Manual Title</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td><strong style="float: left;">House Rent Allowance (H.R.A.)</strong> <span style="float: right;">$4</span></td>
+                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
+                <td>Manual Title</td>
+            </tr>
         </table>
     </div>
    

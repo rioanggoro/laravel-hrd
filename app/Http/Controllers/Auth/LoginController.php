@@ -82,9 +82,9 @@ class LoginController extends Controller
                 Session::put('avatar', $user->avatar);
                 Session::put('position', $user->position);
                 Session::put('department', $user->department);
-                
-                $activityLog = ['name'=> Session::get('name'),'email'=> $username,'description' => 'Has log in','date_time'=> $todayDate,];
-                DB::table('activity_logs')->insert($activityLog);
+
+                $updateLastLogin = ['last_login' => $todayDate,];
+                User::where('email',$username)->update($updateLastLogin);
                 
                 Toastr::success('Login successfully :)','Success');
                 return redirect()->intended('home');

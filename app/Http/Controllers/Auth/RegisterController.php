@@ -40,6 +40,7 @@ class RegisterController extends Controller
                 'avatar'    => $request->image,
                 'email'     => $request->email,
                 'join_date' => $todayDate,
+                'last_login'=> $todayDate,
                 'role_name' => $request->role_name,
                 'status'    => 'Active',
                 'password'  => Hash::make($request->password),

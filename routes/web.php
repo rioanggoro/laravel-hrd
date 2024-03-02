@@ -102,8 +102,6 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::post('user/add/save', 'addNewUserSave')->name('user/add/save');
         Route::post('update', 'update')->name('update');
         Route::post('user/delete', 'delete')->middleware('auth')->name('user/delete');
-        Route::get('activity/log', 'activityLog')->middleware('auth')->name('activity/log');
-        Route::get('activity/login/logout', 'activityLogInLogOut')->middleware('auth')->name('activity/login/logout');
         Route::get('change/password', 'changePasswordView')->middleware('auth')->name('change/password');
         Route::post('change/password/db', 'changePasswordDB')->name('change/password/db');
         

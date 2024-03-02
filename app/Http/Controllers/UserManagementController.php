@@ -170,6 +170,8 @@ class UserManagementController extends Controller
                 ';
             }
 
+            $last_login = Carbon::parse($record->last_login)->diffForHumans();
+
             $data_arr [] = [
                 "no"           => '<span class="id" data-id = '.$record->id.'>'.$start + ($key + 1).'</span>',
                 "name"         => $record->name,
@@ -178,6 +180,7 @@ class UserManagementController extends Controller
                 "position"     => '<span class="position">'.$record->position.'</span>',
                 "phone_number" => '<span class="phone_number">'.$record->phone_number.'</span>',
                 "join_date"    => $record->join_date,
+                "last_login"   => $last_login,
                 "role_name"    => $role_name,
                 "status"       => $status,
                 "department"   => '<span class="department">'.$record->department.'</span>',
@@ -208,20 +211,6 @@ class UserManagementController extends Controller
             "aaData"               => $data_arr
         ];
         return response()->json($response);
-    }
-
-    /** use activity log */
-    public function activityLog()
-    {
-        $activityLog = DB::table('user_activity_logs')->get();
-        return view('usermanagement.user_activity_log',compact('activityLog'));
-    }
-
-    /** activity log */
-    public function activityLogInLogOut()
-    {
-        $activityLog = DB::table('activity_logs')->get();
-        return view('usermanagement.activity_log',compact('activityLog'));
     }
 
     /** profile user */
@@ -337,6 +326,7 @@ class UserManagementController extends Controller
             $user->name         = $request->name;
             $user->email        = $request->email;
             $user->join_date    = $todayDate;
+            $user->last_login   = $todayDate;
             $user->phone_number = $request->phone;
             $user->role_name    = $request->role_name;
             $user->position     = $request->position;
@@ -348,8 +338,9 @@ class UserManagementController extends Controller
             DB::commit();
             Toastr::success('Create new account successfully :)','Success');
             return redirect()->route('userManagement');
-        }catch(\Exception $e){
+        }catch(\Exception $e) {
             DB::rollback();
+            \Log::info($e);
             Toastr::error('User add new account fail :)','Error');
             return redirect()->back();
         }
