@@ -26,7 +26,7 @@
                                 <div class="profile-img-wrap">
                                     <div class="profile-img">
                                         <a href="#">
-                                            <img alt="" src="{{ URL::to('/assets/images/'.Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                            <img class="user-profile" alt="" src="{{ URL::to('/assets/images/'.Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
                                         </a>
                                     </div>
                                 </div>
@@ -144,13 +144,12 @@
             </div>
             
             <div class="tab-content">
-                <!-- Profile Info Tab -->
                 <div id="emp_profile" class="pro-overview tab-pane fade show active">
                     <div class="row">
+                        <!-- Personal Informations -->
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
-                                    <!-- Personal Informations -->
                                     <h3 class="card-title">Personal Informations <a href="#" class="edit-icon" data-toggle="modal" data-target="#personal_info_modal"><i class="fa fa-pencil"></i></a></h3>
                                     <ul class="personal-info">
                                         <li>
@@ -218,10 +217,10 @@
                                             @endif
                                         </li>
                                     </ul>
-                                    <!-- End Personal Informations -->
                                 </div>
                             </div>
                         </div>
+                        <!-- End Personal Informations -->
                         
                         <!-- Emergency Contact -->
                         <div class="col-md-6 d-flex">
@@ -294,10 +293,15 @@
                     </div>
 
                     <div class="row">
+                        <!-- Bank information -->
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
-                                    <h3 class="card-title">Bank information</h3>
+                                    <h3 class="card-title">Bank information 
+                                        <a href="#" class="edit-icon" data-toggle="modal" data-target="#bank_information_modal">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </h3>
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Bank name</div>
@@ -319,6 +323,8 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- /Bank information -->
+
                         <div class="col-md-6 d-flex">
                             <div class="card profile-box flex-fill">
                                 <div class="card-body">
@@ -356,6 +362,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-flex">
@@ -1171,6 +1178,56 @@
         </div>
         <!-- /Profile Modal -->
         @endif
+
+        <!-- Bank information Modal -->
+        <div id="bank_information_modal" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Bank Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('bank/information/save') }}" method="POST">
+                            @csrf
+                            <input type="hidden" class="form-control" name="user_id" value="{{ Session::get('user_id') }}" readonly>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Bank name</label>
+                                        <input type="text" class="form-control @error('bank_name') is-invalid @enderror" name="bank_name" value="{{ old('bank_name') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Bank account No</label>
+                                        <input type="text" class="form-control @error('bank_account_no') is-invalid @enderror" name="bank_account_no" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" value="{{ old('bank_account_no') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>IFSC Code</label>
+                                        <input type="text" class="form-control @error('ifsc_code') is-invalid @enderror" name="ifsc_code" value="{{ old('ifsc_code') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>PAN No</label>
+                                        <input type="text" class="form-control @error('pan_no') is-invalid @enderror" name="pan_no" value="{{ old('pan_no') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-section">
+                                <button type="submit" class="btn btn-primary submit-btn">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Bank information Modal -->
     
         @if (!empty($userInformation))
         <!-- Personal Info Modal -->

@@ -295,8 +295,15 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         
     });
 
-    // ----------------------- training type  --------------------------//
+    // ==================== user profile user ===========================//
+
+    // ---------------------- personal information ----------------------//
     Route::controller(PersonalInformationController::class)->group(function () {
         Route::post('user/information/save', 'saveRecord')->middleware('auth')->name('user/information/save');
+    });
+
+    // ---------------------- bank information  -----------------------//
+    Route::controller(BankInformationController::class)->group(function () {
+        Route::post('bank/information/save', 'saveRecord')->middleware('auth')->name('bank/information/save');
     });
 });
