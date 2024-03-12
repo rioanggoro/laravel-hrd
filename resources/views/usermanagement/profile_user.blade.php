@@ -305,19 +305,35 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Bank name</div>
-                                            <div class="text">ICICI Bank</div>
+                                            @if(!empty($bankInformation->bank_name))
+                                                <div class="text">{{ $bankInformation->bank_name }}</div>
+                                            @else  
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">Bank account No.</div>
-                                            <div class="text">159843014641</div>
+                                            @if(!empty($bankInformation->bank_account_no))
+                                                <div class="text">{{ $bankInformation->bank_account_no }}</div>
+                                            @else  
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">IFSC Code</div>
-                                            <div class="text">ICI24504</div>
+                                            @if(!empty($bankInformation->ifsc_code))
+                                                <div class="text">{{ $bankInformation->ifsc_code }}</div>
+                                            @else  
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                         <li>
                                             <div class="title">PAN No</div>
-                                            <div class="text">TC000Y56</div>
+                                            @if(!empty($bankInformation->pan_no))
+                                                <div class="text">{{ $bankInformation->pan_no }}</div>
+                                            @else  
+                                                <div class="text">N/A</div>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>
@@ -1197,25 +1213,41 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Bank name</label>
-                                        <input type="text" class="form-control @error('bank_name') is-invalid @enderror" name="bank_name" value="{{ old('bank_name') }}">
+                                        @if(!empty($bankInformation->bank_name))
+                                            <input type="text" class="form-control @error('bank_name') is-invalid @enderror" name="bank_name" value="{{ $bankInformation->bank_name }}">
+                                        @else 
+                                            <input type="text" class="form-control @error('bank_name') is-invalid @enderror" name="bank_name" value="{{ old('bank_name') }}">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Bank account No</label>
-                                        <input type="text" class="form-control @error('bank_account_no') is-invalid @enderror" name="bank_account_no" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" value="{{ old('bank_account_no') }}">
+                                        @if(!empty($bankInformation->bank_account_no))
+                                            <input type="text" class="form-control @error('bank_account_no') is-invalid @enderror" name="bank_account_no" value="{{ $bankInformation->bank_account_no }}">
+                                        @else 
+                                            <input type="text" class="form-control @error('bank_account_no') is-invalid @enderror" name="bank_account_no" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" value="{{ old('bank_account_no') }}">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>IFSC Code</label>
-                                        <input type="text" class="form-control @error('ifsc_code') is-invalid @enderror" name="ifsc_code" value="{{ old('ifsc_code') }}">
+                                        @if(!empty($bankInformation->ifsc_code))
+                                            <input type="text" class="form-control @error('ifsc_code') is-invalid @enderror" name="ifsc_code" value="{{ $bankInformation->ifsc_code }}">
+                                        @else 
+                                            <input type="text" class="form-control @error('pan_no') is-invalid @enderror" name="ifsc_code" value="{{ old('ifsc_code') }}">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>PAN No</label>
-                                        <input type="text" class="form-control @error('pan_no') is-invalid @enderror" name="pan_no" value="{{ old('pan_no') }}">
+                                        @if(!empty($bankInformation->pan_no))
+                                            <input type="text" class="form-control @error('pan_no') is-invalid @enderror" name="pan_no" value="{{ $bankInformation->pan_no }}">
+                                        @else 
+                                            <input type="text" class="form-control @error('pan_no') is-invalid @enderror" name="pan_no" value="{{ old('pan_no') }}">
+                                        @endif
                                     </div>
                                 </div>
                             </div>

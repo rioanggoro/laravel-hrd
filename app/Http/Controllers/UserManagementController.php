@@ -12,6 +12,7 @@ use App\Models\ProfileInformation;
 use App\Models\PersonalInformation;
 use App\Rules\MatchOldPassword;
 use App\Models\UserEmergencyContact;
+use App\Models\BankInformation;
 use Carbon\Carbon;
 use Session;
 use Auth;
@@ -218,26 +219,27 @@ class UserManagementController extends Controller
     {   
         $profile = Session::get('user_id'); // get user_id session
         $userInformation = PersonalInformation::where('user_id',$profile)->first(); // user information
+        $bankInformation = BankInformation::where('user_id',$profile)->first(); // user information
         $user = DB::table('users')->get();
         $employees = DB::table('profile_information')->where('user_id',$profile)->first();
 
         /** emergency contact in user profile */
         $emergencyContact = UserEmergencyContact::where('user_id',Session::get('user_id'))->first();
 
-        if(empty($employees))
+        if (empty($employees))
         {
             $information = DB::table('profile_information')->where('user_id',$profile)->first();
-            return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
+            return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact','bankInformation'));
 
         } else {
             $user_id = $employees->user_id;
-            if($user_id == $profile)
+            if ($user_id == $profile)
             {
                 $information = DB::table('profile_information')->where('user_id',$profile)->first();
-                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact','bankInformation'));
             } else {
                 $information = ProfileInformation::all();
-                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','emergencyContact','bankInformation'));
             } 
         }
     }
