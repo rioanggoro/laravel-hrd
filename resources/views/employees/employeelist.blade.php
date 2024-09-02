@@ -13,14 +13,14 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Employee</h3>
+                        <h3 class="page-title">User</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Employee</li>
+                            <li class="breadcrumb-item active">User</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
+                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add User</a>
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                             <a href="{{ route('all/employee/list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
@@ -37,13 +37,13 @@
                     <div class="col-sm-6 col-md-3">  
                         <div class="form-group form-focus">
                             <input type="text" class="form-control floating" name="employee_id">
-                            <label class="focus-label">Employee ID</label>
+                            <label class="focus-label">User ID</label>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">  
                         <div class="form-group form-focus">
                             <input type="text" class="form-control floating">
-                            <label class="focus-label">Employee Name</label>
+                            <label class="focus-label">User Name</label>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3"> 
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Line Manager</label>
+                                        <label class="col-form-label">Role</label>
                                         <select class="select" id="company" name="company">
                                             <option value="">-- Select --</option>
                                             <option value="Soeng Souy">Soeng Souy</option>

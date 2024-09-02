@@ -138,7 +138,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <div> <span class="d-block">Profit</span> </div>
+                                    <div> <span class="d-block">Profit Keseluruhan</span> </div>
                                     <div> <span class="text-danger">-75%</span> </div>
                                 </div>
                                 <h3 class="mb-3">$1,12,000</h3>
@@ -234,7 +234,7 @@
                 <div class="col-md-12 col-lg-6 col-xl-4 d-flex">
                     <div class="card flex-fill">
                         <div class="card-body">
-                            <h4 class="card-title">Today Absent <span class="badge bg-inverse-danger ml-2">5</span></h4>
+                            <h4 class="card-title">Absen Hari Ini <span class="badge bg-inverse-danger ml-2">5</span></h4>
                             <div class="leave-info-box">
                                 <div class="media align-items-center">
                                     <a href="profile.html" class="avatar"><img alt="" src="assets/img/user.jpg"></a>

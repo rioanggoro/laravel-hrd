@@ -2,11 +2,12 @@
 @section('content')
     <div class="main-wrapper">
         <div class="account-content">
-            <a href="{{ route('form/job/list') }}" class="btn btn-primary apply-btn">Apply Job</a>
             <div class="container">
-                <!-- Account Logo -->
+               <!-- Account Logo -->
                 <div class="account-logo">
-                    <a href="index.html"><img src="{{ URL::to('assets/img/logo2.png') }}" alt="Soeng Souy"></a>
+                    <a href="index.html">
+                    <img src="{{ asset('assets/images/tolerant_logo_blc.png') }}" alt="tolerantlogo">
+                    </a>
                 </div>
                 {{-- message --}}
                 {!! Toastr::message() !!}
