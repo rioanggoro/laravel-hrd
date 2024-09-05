@@ -14,7 +14,7 @@
                     </a>
                     <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
                         <li><a class="{{set_active(['home'])}}" href="{{ route('home') }}">Admin Dashboard</a></li>
-                        <li><a class="{{set_active(['em/dashboard'])}}" href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
+                        <li><a class="{{set_active(['em/dashboard'])}}" href="{{ route('em/dashboard') }}">User Dashboard</a></li>
                     </ul>
                 </li>
                 @if (Auth::user()->role_name=='Admin')
@@ -28,7 +28,7 @@
                         </ul>
                     </li>
                 @endif
-                <li class="menu-title"> <span>Employees</span> </li>
+                <li class="menu-title"> <span>User</span> </li>
                 <li class="{{set_active(['all/employee/list','all/employee/list','all/employee/card','form/holidays/new','form/leaves/new',
                     'form/leavesemployee/new','form/leavesettings/page','attendance/page',
                     'attendance/employee/page','form/departments/page','form/designations/page',
@@ -37,23 +37,23 @@
                     'form/leavesemployee/new','form/leavesettings/page','attendance/page',
                     'attendance/employee/page','form/departments/page','form/designations/page',
                     'form/timesheet/page','form/shiftscheduling/page','form/overtime/page']) ? 'noti-dot' : '' }}">
-                        <i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span>
+                        <i class="la la-user"></i> <span> User</span> <span class="menu-arrow"></span>
                     </a>
                     <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
-                        <li><a class="{{set_active(['all/employee/list','all/employee/card'])}} {{ request()->is('all/employee/view/edit/*','employee/profile/*') ? 'active' : '' }}" href="{{ route('all/employee/card') }}">All Employees</a></li>
-                        <li><a class="{{set_active(['form/holidays/new'])}}" href="{{ route('form/holidays/new') }}">Holidays</a></li>
-                        <li><a class="{{set_active(['form/leaves/new'])}}" href="{{ route('form/leaves/new') }}">Leaves (Admin) 
+                        <li><a class="{{set_active(['all/employee/list','all/employee/card'])}} {{ request()->is('all/employee/view/edit/*','employee/profile/*') ? 'active' : '' }}" href="{{ route('all/employee/card') }}">All User</a></li>
+                        <li><a href="{{ route('form.holidays.new') }}">Atur Jadwal Libur</a></li>
+                        <li><a class="{{set_active(['form/leaves/new'])}}" href="{{ route('form/leaves/new') }}">Cuti (Admin) 
                             <span class="badge badge-pill bg-primary float-right">1</span></a>
                         </li>
-                        <li><a class="{{set_active(['form/leavesemployee/new'])}}" href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a></li>
-                        <li><a class="{{set_active(['form/leavesettings/page'])}}" href="{{ route('form/leavesettings/page') }}">Leave Settings</a></li>
-                        <li><a class="{{set_active(['attendance/page'])}}" href="{{ route('attendance/page') }}">Attendance (Admin)</a></li>
-                        <li><a class="{{set_active(['attendance/employee/page'])}}" href="{{ route('attendance/employee/page') }}">Attendance (Employee)</a></li>
-                        <li><a class="{{set_active(['form/departments/page'])}}" href="{{ route('form/departments/page') }}">Departments</a></li>
+                        <li><a class="{{set_active(['form/leavesemployee/new'])}}" href="{{route('form/leavesemployee/new')}}">Cuti (Karyawan) </a></li>
+                        <li><a class="{{set_active(['form/leavesettings/page'])}}" href="{{ route('form/leavesettings/page') }}">Pengaturan Cuti</a></li>
+                        {{-- <li><a class="{{set_active(['attendance/page'])}}" href="{{ route('attendance/page') }}">Kehadiran (Admin)</a></li> --}}
+                        <li><a class="{{set_active(['attendance/employee/page'])}}" href="{{ route('attendance/employee/page') }}">Kehadiran (Karyawan)</a></li>
+                        <li><a class="{{set_active(['form/departments/page'])}}" href="{{ route('form/departments/page') }}">Jabatan</a></li>
                         <li><a class="{{set_active(['form/designations/page'])}}" href="{{ route('form/designations/page') }}">Designations</a></li>
-                        <li><a class="{{set_active(['form/timesheet/page'])}}" href="{{ route('form/timesheet/page') }}">Timesheet</a></li>
-                        <li><a class="{{set_active(['form/shiftscheduling/page'])}}" href="{{ route('form/shiftscheduling/page') }}">Shift & Schedule</a></li>
-                        <li><a class="{{set_active(['form/overtime/page'])}}" href="{{ route('form/overtime/page') }}">Overtime</a></li>
+                        <li><a class="{{set_active(['form/timesheet/page'])}}" href="{{ route('form/timesheet/page') }}">Jobdesc</a></li>
+                        {{-- <li><a class="{{set_active(['form/shiftscheduling/page'])}}" href="{{ route('form/shiftscheduling/page') }}">Shift & Schedule</a></li> --}}
+                        <li><a class="{{set_active(['form/overtime/page'])}}" href="{{ route('form/overtime/page') }}">Lembur</a></li>
                     </ul>
                 </li>
                 <li class="menu-title"> <span>HR</span> </li>

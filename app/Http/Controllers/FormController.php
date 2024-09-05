@@ -117,4 +117,25 @@ class FormController extends Controller
         Toastr::success('Data deleted successfully :)','Success');
         return redirect()->route('form/view/detail');
     }
+
+    /** delete record */
+public function destroy($id)
+{
+    DB::beginTransaction();
+    try {
+        // Cek apakah id valid dan data ditemukan
+        $holiday = Holiday::findOrFail($id);
+        $holiday->delete();
+
+        DB::commit();
+        Toastr::success('Holiday deleted successfully :)', 'Success');
+        return redirect()->back();
+    } catch (\Exception $e) {
+        DB::rollback();
+        // Tangani error dan tampilkan notifikasi
+        Toastr::error('Failed to delete holiday :)', 'Error');
+        return redirect()->back();
+    }
+}
+
 }

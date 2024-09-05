@@ -9,14 +9,14 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Leaves <span id="year"></span></h3>
+                        <h3 class="page-title">Pengajuan Cuti <span id="year"></span></h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Leaves</li>
+                            <li class="breadcrumb-item active">Pengajuan Cuti</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_leave"><i class="fa fa-plus"></i> Add Leave</a>
+                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_leave"><i class="fa fa-plus"></i> Tambahkan Pengajuan Cuti</a>
                     </div>
                 </div>
             </div>
@@ -24,13 +24,13 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="stats-info">
-                        <h6>Today Presents</h6>
+                        <h6>Hadir Hari Ini</h6>
                         <h4>12 / 60</h4>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="stats-info">
-                        <h6>Planned Leaves</h6>
+                        <h6>Perencanaan Cuti</h6>
                         <h4>8 <span>Today</span></h4>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Leave</h5>
+                        <h5 class="modal-title">Tambah Cuti</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -186,29 +186,29 @@
                         <form action="{{ route('form/leaves/save') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label>Leave Type <span class="text-danger">*</span></label>
+                                <label>Jenis Cuti <span class="text-danger">*</span></label>
                                 <select class="select" id="leaveType" name="leave_type">
-                                    <option selected disabled>Select Leave Type</option>
-                                    <option value="Casual Leave 12 Days">Casual Leave 12 Days</option>
-                                    <option value="Medical Leave">Medical Leave</option>
-                                    <option value="Loss of Pay">Loss of Pay</option>
+                                    <option selected disabled>Pilih Jenis Cuti</option>
+                                    <option value="Casual Leave 12 Days">Cuti Santai 12 Hari</option>
+                                    <option value="Medical Leave">Cuti Sakit</option>
+                                    <option value="Loss of Pay">Cuti Tanpa Digaji</option>
                                 </select>
                             </div>
                             <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ Auth::user()->user_id }}">
                             <div class="form-group">
-                                <label>From <span class="text-danger">*</span></label>
+                                <label>Dari Tanggal <span class="text-danger">*</span></label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker" id="from_date" name="from_date">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>To <span class="text-danger">*</span></label>
+                                <label>Sampai Tanggal <span class="text-danger">*</span></label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker" id="to_date" name="to_date">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Leave Reason <span class="text-danger">*</span></label>
+                                <label>Alasannya <span class="text-danger">*</span></label>
                                 <textarea rows="4" class="form-control" id="leave_reason" name="leave_reason"></textarea>
                             </div>
                             <div class="submit-section">

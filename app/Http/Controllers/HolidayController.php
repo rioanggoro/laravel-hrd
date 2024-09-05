@@ -7,13 +7,14 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Holiday;
 use DB;
 
+
 class HolidayController extends Controller
 {
     /** holidays page */
     public function holiday()
     {
         $holiday = Holiday::all();
-        return view('employees.holidays',compact('holiday'));
+        return view('employees.holidays', compact('holiday'));
     }
     
     /** save record */
@@ -28,7 +29,7 @@ class HolidayController extends Controller
         try {
             $holiday = new Holiday;
             $holiday->name_holiday = $request->nameHoliday;
-            $holiday->date_holiday  = $request->holidayDate;
+            $holiday->date_holiday = $request->holidayDate;
             $holiday->save();
             
             DB::commit();
@@ -43,7 +44,7 @@ class HolidayController extends Controller
     }
     
     /** update record */
-    public function updateRecord( Request $request)
+    public function updateRecord(Request $request)
     {
         DB::beginTransaction();
         try{
@@ -52,21 +53,40 @@ class HolidayController extends Controller
             $holidayDate  = $request->holidayDate;
 
             $update = [
-
                 'id'           => $id,
                 'name_holiday' => $holidayName,
                 'date_holiday' => $holidayDate,
             ];
 
-            Holiday::where('id',$request->id)->update($update);
+            Holiday::where('id', $request->id)->update($update);
             DB::commit();
             Toastr::success('Holiday updated successfully :)','Success');
             return redirect()->back();
 
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Holiday update fail :)','Error');
             return redirect()->back();
         }
     }
+
+    /** delete record */
+/** delete record */
+public function destroy($id)
+{
+    DB::beginTransaction();
+    try {
+        $holiday = Holiday::findOrFail($id);
+        $holiday->delete();
+
+        DB::commit();
+        Toastr::success('Holiday deleted successfully :)', 'Success');
+        return redirect()->back();
+    } catch (\Exception $e) {
+        DB::rollback();
+        Toastr::error('Failed to delete holiday :)', 'Error');
+        return redirect()->back();
+    }
+}
+
 }

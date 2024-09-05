@@ -1,6 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HolidayController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\TrainersController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\LockScreen;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LeavesController;
+use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\ExpenseReportsController;
+use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\TrainingTypeController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\PersonalInformationController;
+use App\Http\Controllers\BankInformationController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +36,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/** for side bar menu active */
-function set_active($route) {
-    if (is_array($route )){
-        return in_array(Request::path(), $route) ? 'active' : '';
-    }
-    return Request::path() == $route ? 'active' : '';
-}
 
 Route::get('/', function () {
     return view('auth.login');
@@ -187,11 +203,17 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
     });
 
     // --------------------------- form holiday ---------------------------//
-    Route::controller(HolidayController::class)->group(function () {
-        Route::get('form/holidays/new', 'holiday')->middleware('auth')->name('form/holidays/new');
-        Route::post('form/holidays/save', 'saveRecord')->middleware('auth')->name('form/holidays/save');
-        Route::post('form/holidays/update', 'updateRecord')->middleware('auth')->name('form/holidays/update');    
-    });
+Route::controller(HolidayController::class)->group(function () {
+    Route::get('form/holidays/new', 'holiday')->middleware('auth')->name('form.holidays.new'); // Route untuk menampilkan form pembuatan libur
+    Route::post('form/holidays/save', 'saveRecord')->middleware('auth')->name('form.holidays.save'); // Route untuk menyimpan data libur baru
+    Route::post('form/holidays/update', 'updateRecord')->middleware('auth')->name('form.holidays.update'); // Route untuk mengupdate data libur
+    Route::delete('form/holidays/{id}', [HolidayController::class, 'destroy'])->middleware('auth')->name('holidays.destroy');
+
+});
+
+
+
+
 
     // -------------------------- form leaves ----------------------------//
     Route::controller(LeavesController::class)->group(function () {

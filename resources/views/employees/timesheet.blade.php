@@ -361,18 +361,17 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4">
-                                    <label>Deadline <span class="text-danger">*</span></label>
+                                    <label>Tenggat Waktu <span class="text-danger">*</span></label>
                                     <div class="cal-icon">
                                         <input class="form-control" type="text" value="5 May 2019" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label>Total Hours <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" value="100" readonly>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label>Remaining Hours <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" value="60" readonly>
+                                    <label for="status">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Non Active</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
