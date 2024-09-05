@@ -8,14 +8,14 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Holidays <span id="year"></span></h3>
+                        <h3 class="page-title">Libur <span id="year"></span></h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Holidays</li>
+                            <li class="breadcrumb-item active">Libur</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Add Holiday</a>
+                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Pengajuan Libur</a>
                     </div>
                 </div>
             </div>
@@ -36,15 +36,16 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Title</th>
-                                    <th>Holiday Date</th>
-                                    <th>Day</th>
+                                    <th>Alasan Libur</th>
+                                    <th>Tanggal Libur</th>
+                                    <th>Hari</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($holiday as $key => $item)
-                                    <tr class="{{ ($today_date > $item->date_holiday) ? 'holiday-completed' : 'holiday-upcoming' }}">
+                                    <tr>
+                                        <td hidden class="id">{{ $item->id }}</td> <!-- Pastikan id ini ada -->
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->name_holiday }}</td>
                                         <td>{{ date('d F, Y', strtotime($item->date_holiday)) }}</td>
@@ -111,11 +112,11 @@
                         <form action="{{ route('form.holidays.save') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label>Holiday Name <span class="text-danger">*</span></label>
+                                <label>Alasan Libur <span class="text-danger">*</span></label>
                                 <input class="form-control" type="text" id="nameHoliday" name="nameHoliday">
                             </div>
                             <div class="form-group">
-                                <label>Holiday Date <span class="text-danger">*</span></label>
+                                <label>Tanggal Libur <span class="text-danger">*</span></label>
                                 <div class="cal-icon">
                                     <input class="form-control datetimepicker" type="text" id="holidayDate" name="holidayDate">
                                 </div>
@@ -145,17 +146,17 @@
                             @csrf
                             <input type="hidden" name="id" id="e_id" value="">
                             <div class="form-group">
-                                <label>Holiday Name <span class="text-danger">*</span></label>
+                                <label>Alasan Libur <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="holidayName_edit" name="holidayName" value="">
                             </div>
                             <div class="form-group">
-                                <label>Holiday Date <span class="text-danger">*</span></label>
+                                <label>Tanggal Libur <span class="text-danger">*</span></label>
                                 <div class="cal-icon">
                                     <input type="text" class="form-control datetimepicker" id="holidayDate_edit" name="holidayDate" value="">
                                 </div>
                             </div>
                             <div class="submit-section">
-                                <button type="submit" class="btn btn-primary submit-btn">Save</button>
+                                <button type="submit" class="btn btn-primary submit-btn">Simpan</button>
                             </div>
                         </form>
                     </div>

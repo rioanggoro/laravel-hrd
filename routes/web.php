@@ -207,9 +207,12 @@ Route::controller(HolidayController::class)->group(function () {
     Route::get('form/holidays/new', 'holiday')->middleware('auth')->name('form.holidays.new'); // Route untuk menampilkan form pembuatan libur
     Route::post('form/holidays/save', 'saveRecord')->middleware('auth')->name('form.holidays.save'); // Route untuk menyimpan data libur baru
     Route::post('form/holidays/update', 'updateRecord')->middleware('auth')->name('form.holidays.update'); // Route untuk mengupdate data libur
-    Route::delete('form/holidays/{id}', [HolidayController::class, 'destroy'])->middleware('auth')->name('holidays.destroy');
+    Route::delete('form/holidays/{id}', 'destroy')->middleware('auth')->name('holidays.destroy'); // Route untuk menghapus data libur
+    Route::get('form/holidays/edit/{id}', 'editRecord')->middleware('auth')->name('form.holidays.edit'); // Route untuk menampilkan form edit libur
+    Route::post('form/holidays/update', [HolidayController::class, 'updateRecord'])->middleware('auth')->name('form.holidays.update');
 
 });
+
 
 
 
